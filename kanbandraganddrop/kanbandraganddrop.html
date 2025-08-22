@@ -1,0 +1,152 @@
+<template>
+      <div class="slds-box slds-p-around_none slds-m-top_x-small slds-m-bottom_medium slds-m-horizontal_none">
+   <lightning-layout>      
+      <lightning-layout-item  padding="around-small" class="custom-box">
+
+
+            <div class="slds-text-heading_large">Prospecting</div>
+            <div data-id="Prospecting" style="height:100%" data-role="drop-target" ondrop={handleDrop} class="scroll-zone"
+                ondragenter={handleDragEnter}  onscroll={handleScroll} ondragover={handleDragOver} ondragleave={handleDragLeave}>
+
+                <template if:true={prospectingList}>
+                    <template for:each={prospectingList} for:item="data">
+                        <div key={data.Id} draggable="true" id={data.Id} data-id={data.Id} ondragstart={taskDragStart}
+                            ondragend={taskDragEnd} class="slds-p-around_small">
+                            <lightning-card style="padding: 10px;" variant="Narrow">
+                              <div class="slds-p-around_medium">
+                                    <p><strong>{data.Name}</strong></p>
+                                    <p>{data.Amount}</p>
+                                    <p>{data.StageName}</p>
+                                    <div style="display: flex; justify-content: space-between;">
+                                        <lightning-button label="Edit" title="Non-primary action"
+                                            onclick={handleEditClick} data-id={data.Id} class="slds-m-left_x-small"></lightning-button>
+                                        <lightning-button label="Delete" title="Non-primary action"
+                                            onclick={handledeleteClick} data-id={data.Id} class="slds-m-left_x-small"></lightning-button>
+
+                                    </div>
+
+                                </div>
+
+                            </lightning-card>
+                        </div>
+                    </template>
+                </template>
+            </div>
+
+        </lightning-layout-item>
+        <lightning-layout-item padding="around-small" class="custom-box2">
+            <div class="slds-text-heading_large">Qualification </div>
+            <div data-id="Qualification" style="height:100%" data-role="drop-target" ondrop={handleDrop}
+             class="scroll-zone"   ondragenter={handleDragEnter} ondragover={handleDragOver} ondragleave={handleDragLeave}>
+                <template if:true={QualificationList}>
+                    <template for:each={QualificationList} for:item="data">
+                        <div key={data.Id} draggable="true" id={data.Id} data-id={data.Id} ondragstart={taskDragStart}
+                            ondragend={taskDragEnd} class="slds-p-around_small">
+                            <lightning-card style="padding: 10px;" variant="Narrow">
+                             <div class="slds-p-around_medium">
+                                    <p><strong>{data.Name}</strong></p>
+                                    <p>{data.Amount}</p>
+                                    <p>{data.StageName}</p>
+                                    <div style="display: flex; justify-content: space-between;">
+                                           <lightning-button label="Edit" title="Non-primary action"
+                                            onclick={handleEditClick} data-id={data.Id} class="slds-m-left_x-small"></lightning-button>
+                                        <lightning-button label="Delete" title="Non-primary action"
+                                            onclick={handledeleteClick} data-id={data.Id} class="slds-m-left_x-small"></lightning-button>
+
+                                    </div>
+
+                                </div>
+                            </lightning-card>
+                        </div>
+                    </template>
+                </template>
+            </div>
+        </lightning-layout-item>
+        <lightning-layout-item  padding="around-small" class="custom-box3">
+            <div class="slds-text-heading_large">Proposal </div>
+            <div data-id="Proposal" style="height:100%" data-role="drop-target" ondrop={handleDrop}
+                ondragenter={handleDragEnter} class="scroll-zone"  onscroll={handleScroll} ondragover={handleDragOver} ondragleave={handleDragLeave}>
+                <template if:true={proposalList}>
+                    <template for:each={proposalList} for:item="data">
+                        <div key={data.Id} draggable="true" id={data.Id} data-id={data.Id} ondragstart={taskDragStart}
+                            ondragend={taskDragEnd} class="slds-p-around_small">
+                            <lightning-card style="padding: 10px;" variant="Narrow">
+                               <div class="slds-p-around_medium">
+                                    <p><strong>{data.Name}</strong></p>
+                                    <p>{data.Amount}</p>
+                                    <p>{data.StageName}</p>
+                                   <div style="display: flex; justify-content: space-between;">
+                                           <lightning-button label="Edit" title="Non-primary action"
+                                            onclick={handleEditClick} data-id={data.Id} class="slds-m-left_x-small"></lightning-button>
+                                        <lightning-button label="Delete" title="Non-primary action"
+                                            onclick={handledeleteClick} data-id={data.Id} class="slds-m-left_x-small"></lightning-button>
+
+                                    </div>
+
+                                </div>
+
+                            </lightning-card>
+                        </div>
+                    </template>
+                </template>
+            </div>
+        </lightning-layout-item>
+        <lightning-layout-item padding="around-small" class="custom-box4">
+            <div class="slds-text-heading_large">Closed Won </div>
+            <div data-id="ClosedWon" style="height:100%" data-role="drop-target" ondrop={handleDrop}
+                ondragenter={handleDragEnter} class="scroll-zone" ondragover={handleDragOver} ondragleave={handleDragLeave}  onscroll={handleScroll}>
+                <template if:true={ClosedwonList}>
+                    <template for:each={ClosedwonList} for:item="data">
+                        <div key={data.Id} draggable="true" id={data.Id} data-id={data.Id} ondragstart={taskDragStart}
+                            ondragend={taskDragEnd} class="slds-p-around_small">
+                            <lightning-card style="padding: 10px;" variant="Narrow">
+                               <div class="slds-p-around_medium">
+                                    <p><strong>{data.Name}</strong></p>
+                                    <p>{data.Amount}</p>
+                                    <p>{data.StageName}</p>
+                                    <div style="display: flex; justify-content: space-between;">
+                                          <lightning-button label="Edit" title="Non-primary action"
+                                            onclick={handleEditClick} data-id={data.Id} class="slds-m-left_x-small"></lightning-button>
+                                        <lightning-button label="Delete" title="Non-primary action"
+                                            onclick={handledeleteClick} data-id={data.Id} class="slds-m-left_x-small"></lightning-button>
+
+                                    </div>
+
+                                </div>
+                            </lightning-card>
+                        </div>
+                    </template>
+                </template>
+            </div>
+        </lightning-layout-item>
+        <lightning-layout-item padding="around-small" class="custom-box4">
+            <div class="slds-text-heading_large">Closed Lost </div>
+            <div data-id="ClosedLost" class="scroll-zone" style="height:100%" data-role="drop-target" ondrop={handleDrop}
+                ondragenter={handleDragEnter} ondragover={handleDragOver}  onscroll={handleScroll} ondragleave={handleDragLeave}>
+                <template if:true={ClosedLostList}>
+                    <template for:each={ClosedLostList} for:item="data">
+                        <div key={data.Id} draggable="true" id={data.Id} data-id={data.Id} ondragstart={taskDragStart}
+                            ondragend={taskDragEnd} class="slds-p-around_small">
+                            <lightning-card style="padding: 10px;" variant="Narrow">
+                                <div class="slds-p-around_medium">
+                                    <p><strong>{data.Name}</strong></p>
+                                    <p>{data.Amount}</p>
+                                    <p>{data.StageName}</p>
+                                    <div style="display: flex; justify-content: space-between;">
+                                           <lightning-button label="Edit" title="Non-primary action"
+                                            onclick={handleEditClick} data-id={data.Id} class="slds-m-left_x-small"></lightning-button>
+                                        <lightning-button label="Delete" title="Non-primary action"
+                                            onclick={handledeleteClick} data-id={data.Id} class="slds-m-left_x-small"></lightning-button>
+
+                                    </div>
+
+                                </div>
+                            </lightning-card>
+                        </div>
+                    </template>
+                </template>
+            </div>
+        </lightning-layout-item>
+    </lightning-layout>
+    </div>
+</template>

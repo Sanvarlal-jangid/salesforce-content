@@ -1,0 +1,23 @@
+.custom-container{
+	color : black;
+}
+/* shoppingApp.css */
+.product-card {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 1rem;
+    text-align: center;
+}
+
+.product-image {
+    width: 100%;
+    max-width: 150px;
+    height: auto;
+    margin-bottom: 1rem;
+}
+.product-item {
+    width: 100%;
+    max-width: 100px;
+    height: auto;
+    margin-bottom: 1rem;
+}

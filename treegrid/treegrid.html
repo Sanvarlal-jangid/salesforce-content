@@ -1,0 +1,13 @@
+<template>
+    <lightning-card variant="Narrow" title="Account Hierarchy" icon-name="standard:account">
+        <div class="slds-p-around_medium">
+            <lightning-tree-grid
+                columns={columns}
+                data={gridData}
+                key-field="Id"
+                hide-checkbox-column
+            >
+            </lightning-tree-grid>
+        </div>
+    </lightning-card>
+</template>
