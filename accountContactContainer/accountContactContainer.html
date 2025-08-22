@@ -1,0 +1,6 @@
+<template>
+    <lightning-card title="Account and Contact Viewer">
+        <c-account-list onaccountselected={handleAccountSelected}></c-account-list>
+        <c-contact-list account-id={selectedAccountId}></c-contact-list>
+    </lightning-card>
+</template>

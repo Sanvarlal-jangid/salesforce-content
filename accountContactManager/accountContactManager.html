@@ -1,0 +1,58 @@
+<template>
+    <lightning-button label="Create Account" onclick={openAccountModal}></lightning-button>
+
+    <!-- Account Modal -->
+    <template if:true={showAccountModal}>
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-modal__close" title="Close" onclick={closeAccountModal}>
+                        <lightning-icon icon-name="utility:close" alternative-text="Close" size="small"></lightning-icon>
+                    </button>
+                    <h2 class="slds-modal__title slds-hyphenate">New Account</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" id="account-modal-content">
+                    <lightning-record-edit-form object-api-name="Account" onsuccess={handleAccountSuccess}>
+                        <lightning-messages></lightning-messages>
+                        <lightning-input-field field-name="Name"></lightning-input-field>
+                        <lightning-input-field field-name="Phone"></lightning-input-field>
+                        <lightning-input-field field-name="Industry"></lightning-input-field>
+                        <lightning-button type="submit" label="Save"></lightning-button>
+                    </lightning-record-edit-form>
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning-button label="Cancel" onclick={closeAccountModal}></lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+
+    <!-- Contact Modal -->
+    <template if:true={showContactModal}>
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-modal__close" title="Close" onclick={closeContactModal}>
+                        <lightning-icon icon-name="utility:close" alternative-text="Close" size="small"></lightning-icon>
+                    </button>
+                    <h2 class="slds-modal__title slds-hyphenate">Add Contacts</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" id="contact-modal-content">
+                    <c-custombuttoncell
+                        key-field="Id"
+                        data={contacts}
+                        columns={columns}
+                        hide-checkbox-column="true"
+                        onselectedvalue={handleselected}>
+                    </c-custombuttoncell>
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning-button label="Cancel" onclick={closeContactModal} class="slds-m-right_small"></lightning-button>
+                    <lightning-button variant="brand" label="Save Selected Contacts" onclick={handleSaveContacts}></lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

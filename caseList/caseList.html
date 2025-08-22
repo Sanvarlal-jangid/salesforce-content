@@ -1,0 +1,19 @@
+<template>
+    <lightning-card title="Case List">
+        <div class="slds-m-around_medium">
+            <lightning-datatable
+                key-field="Id"
+                data={cases}
+                columns={columns}
+                onrowaction={handleRowAction}>
+            </lightning-datatable>
+        </div>
+
+        <div class="slds-m-around_medium">
+            <h3><strong>Status Summary:</strong></h3>
+            <p>New: {newCount}</p>
+            <p>Working: {workingCount}</p>
+            <p>Escalated: {escalatedCount}</p>
+        </div>
+    </lightning-card>
+</template>

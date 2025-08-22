@@ -1,0 +1,6 @@
+<template>
+    <lightning-card title="Case Management Dashboard">
+        <c-case-list oncaseselected={handleCaseSelection}></c-case-list>
+        <c-case-detail case-record={selectedCase}></c-case-detail>
+    </lightning-card>
+</template>

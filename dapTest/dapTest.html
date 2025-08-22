@@ -1,0 +1,87 @@
+<template>
+    <div style="background-color: white;">
+        <div>
+            <lightning-select 
+                name="pies" 
+                label="Select your pies" 
+                value={value}
+                options={options}
+                onchange={handleChange} 
+                multiple size="3">
+            </lightning-select>
+        </div>
+        <div class="slds-m-top_large">
+            <lightning-button 
+                        variant="base" 
+                        label="Add more Filter" 
+                        onclick={handleClickButton} 
+                        class="slds-m-left_x-small">
+            </lightning-button>
+            <template for:each={filter} for:item="filt">
+                <div key={filt.Id}>
+                    <div class="slds-grid slds-wrap" style="margin-right: -38px;">
+                        <div class="slds-col slds-size_1-of-12 t b">
+                            {filt.Id}
+                        </div>
+                        <div class="slds-col slds-size_3-of-12 t" style="margin-right: -83px">
+                            <p>Filter Value</p>
+                            <lightning-input 
+                                type="text" 
+                                class="value"
+                                variant="label-hidden"
+                                onchange={changlVlue}
+                                data-object={filt.Id}
+                                data-id={filt.Id}
+                                value={filt.valueText}></lightning-input>
+                        </div>
+                        <div class="slds-col slds-size_2-of-12 t">
+                            <p>Conjuction</p>
+                            <lightning-combobox
+                                name="progress"
+                                label="Status"
+                                value={filt.valueconjuction}
+                                placeholder="Select Progress"
+                                options={optionsConuction}
+                                onchange={handleChangeConujction}
+                                variant="label-hidden" 
+                                data-object={filt.Id}>
+                            </lightning-combobox>
+                        </div>
+                        <div class="slds-col slds-size_2-of-12 t">
+                            <p>Field</p>
+                            <lightning-combobox
+                                name="progress"
+                                label="Status"
+                                value={filt.valuefield}
+                                placeholder="Select Progress"
+                                options={getFieldForFilter}
+                                onchange={handleChangeFilter}
+                                variant="label-hidden" 
+                                data-object={filt.Id}>
+                            </lightning-combobox>
+                        </div>
+                    </div>
+                </div>
+            </template>
+            <div style="width: 20%;">
+                <lightning-input 
+                type="text" class="con" 
+                label="Conjuction" onchange={filterApply}></lightning-input>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div style="height: 300px;">
+        <lightning-datatable 
+            key-field="id" 
+            data={filterData} 
+            columns={columns} 
+            onrowaction={handleRowAction}
+            sorted-by={sortBy}
+            sorted-direction={sortDirection}
+            onsort={doSorting}>
+        </lightning-datatable>
+    </div>
+</template>

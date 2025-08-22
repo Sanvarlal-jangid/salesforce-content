@@ -1,0 +1,17 @@
+<template>
+    <lightning-card title="Case Comments">
+        <lightning-textarea label="Add a Comment" value={newComment} onchange={handleCommentChange}></lightning-textarea>
+        <lightning-button label="Add Comment" onclick={addComment} class="slds-m-top_small"></lightning-button>
+
+        <template for:each={displayedComments} for:item="comment">
+            <div key={comment.Id} class="slds-box slds-m-top_small">
+                <h2><strong>{comment.OwnerName}</strong></h2>
+                <p><strong> {comment.CommentBody}</strong></p>
+            </div>
+        </template>
+
+        <template if:true={showViewMore}>
+            <lightning-button label="View More" onclick={loadMoreComments}></lightning-button>
+        </template>
+    </lightning-card>
+</template>

@@ -1,0 +1,10 @@
+<template>
+    <lightning-card title="Contact Data">
+        <lightning-datatable
+            key-field="Id"
+            data={contactData}
+            columns={columnData} hide-checkbox-column="true"></lightning-datatable>
+        </lightning-card>
+        <lightning-button label="ChildToParent" onclick={handleClick}></lightning-button>
+
+</template>

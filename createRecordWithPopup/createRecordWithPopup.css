@@ -1,0 +1,14 @@
+lightning-button.oppbutton {
+
+	--sds-c-button-brand-color-background: #ecbd22;
+
+    --sds-c-button-text-color: #f4f7f9;
+
+}
+lightning-button.green {
+
+	--sds-c-button-brand-color-background: #22ec5f;
+
+    --sds-c-button-text-color: #f4f7f9;
+
+}

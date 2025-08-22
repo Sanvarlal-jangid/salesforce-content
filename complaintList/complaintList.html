@@ -1,0 +1,19 @@
+<template>
+    <lightning-card title="Complaint List">
+        <!-- <lightning-input label="Search by Case Number" value={searchCaseNumber} onchange={handleCaseNumberChange}></lightning-input>
+        <lightning-input label="Search by Product Name" value={searchProductName} onchange={handleProductNameChange}></lightning-input>
+        <lightning-input label="Search by Contact Name" value={searchContactName} onchange={handleContactNameChange}></lightning-input> -->
+        <lightning-input
+            label="Search"
+            value={searchKey}
+            onchange={handleSearchChange}>
+        </lightning-input>
+<div style="height: 400px;">
+        <lightning-datatable
+            key-field="Id"
+            data={filteredCases}
+            columns={columns}
+            onrowaction={handleRowAction}
+        ></lightning-datatable></div>
+    </lightning-card>
+</template>

@@ -1,0 +1,26 @@
+<template>
+    <lightning-card title="Contact Viewer">
+        <div class="slds-m-around_medium"> <!-- Field Selector -->
+            <div class="slds-form-element"> <label class="slds-form-element__label">Select Fields To Display:</label>
+                <div class="slds-form-element__control"> <c-multi-select-combobox options={availableFields}
+                        single-select={isMultiSelect} show-pills={showPills} onchange={handleSelectionChange}>
+                    </c-multi-select-combobox> </div>
+            </div> <!-- Filter Rows --> <template for:each={filters} for:item="filter">
+                <div key={filter.id} class="slds-grid slds-gutters slds-m-top_medium"> <lightning-input
+                        label="Filter Value" value={filter.value} data-id={filter.id} onchange={handleInputChange}>
+                    </lightning-input>
+                    <lightning-combobox label="Condition" options={filterConditions} value={filter.condition}
+                        data-id={filter.id} onchange={handleConditionChange}> </lightning-combobox> <lightning-combobox
+                        label="Field" options={filterFields} value={filter.field} data-id={filter.id}
+                        onchange={handleFieldChange}> </lightning-combobox>
+                </div>
+            </template> <lightning-button label="Add More Filter" class="slds-m-top_small"
+                onclick={addFilterRow}></lightning-button> <!-- Conjunction Dropdown --> <lightning-combobox
+                label="Conjunction Between Filters" options={conjunctionOptions} value={filterConjunction}
+                onchange={handleConjunctionChange} class="slds-m-top_medium"> </lightning-combobox> <!-- Data Table -->
+            <lightning-datatable style="height: 400px;" key-field="Id" data={contacts} columns={columns}
+                draft-values={draftValues} onsave={handleSave} hide-checkbox-column class="slds-m-top_large">
+            </lightning-datatable>
+        </div>
+    </lightning-card>
+</template>

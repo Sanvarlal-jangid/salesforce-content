@@ -1,0 +1,12 @@
+<template>
+    <lightning-card title="Case Detail">
+        <template if:true={caseRecord}>
+            <p><strong>Case ID:</strong> {caseRecord.CaseNumber}</p>
+            <p><strong>Subject:</strong> {caseRecord.Subject}</p>
+            <p><strong>Description:</strong> {caseRecord.Description}</p>
+            <p><strong>Status:</strong> {caseRecord.Status}</p>
+            <p><strong>Priority:</strong> {caseRecord.Priority}</p>
+            <p><strong>Created Date:</strong> {caseRecord.CreatedDate}</p>
+        </template>
+    </lightning-card>
+</template>

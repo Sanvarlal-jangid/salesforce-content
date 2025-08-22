@@ -1,0 +1,10 @@
+.t{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.b{
+    justify-content: center;
+    /* font-weight: bold; */
+    font-size: large;
+}

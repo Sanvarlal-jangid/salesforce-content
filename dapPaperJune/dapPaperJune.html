@@ -1,0 +1,242 @@
+<template>
+    <div style="background-color: white; padding:10px">
+        <lightning-layout vertical-align="stretch" multiple-rows="true" class="x-large">
+            <div class="slds-scrollable element" style="height: 400px;width: 24%;  background-color: #bed7eb; border-radius:5px" tabindex="0"
+                    onscroll={loadMoreData} data-object="todo">
+                <div class="slds-text-longform">
+                    <lightning-layout-item flexibility="auto" padding="around-small" class="custom-box"
+                       >
+                        <div class="slds-text-heading_medium" style="text-align:center">To Do</div>
+                        <div data-object="todo" id="todo" style="height:100%" data-role="drop-target" ondrop={handleDrop}
+                            ondragenter={handleDragEnter} ondragover={handleDragOver} ondragleave={handleDragLeave}>
+                            <template if:true={todoRecords}>
+                                <template for:each={todoRecords} for:item="data">
+                                    <div key={data.Id} draggable="true" id={data.Id} data-id={data.Id}
+                                        ondragstart={taskDragStart} ondragend={taskDragEnd} class="slds-p-around_small">
+                                        <lightning-card style="width: 50px;" variant="Narrow" title={data.Subject}>
+                                            <div class="slds-p-horizontal_small">
+                                                <div style="display: flex; justify-content:space-between">
+                                                    <template if:true={data.Task_Name__c}>
+                                                        {data.Task_Name__c}<br />
+                                                    </template>
+                                                    <lightning-icon icon-name='utility:edit' alternative-text='edit'
+                                                        size='small' title='edit' 
+                                                        data-object={data.Id} 
+                                                        data-status={data.Status__c}
+                                                        onclick={onclickpencil}>
+                                                    </lightning-icon>
+                                                </div>
+                                                <template if:true={data.Assigned_To__r.Name}>
+                                                    {data.Assigned_To__r.Name}<br />
+                                                </template>
+                                                <div style="display: flex; justify-content: space-between">
+                                                    <template if:true={data.Due_Date__c}>
+                                                        {data.Due_Date__c}<br />
+                                                    </template>
+                                                    <template if:true={data.Priority__c}>
+                                                        <template lwc:if={data.isRed}>
+                                                            <lightning-badge label={data.Priority__c}
+                                                                style="background-color: red; color:white">
+                                                            </lightning-badge>
+                                                        </template>
+                                                        <template lwc:elseif={data.isGreen}>
+                                                            <lightning-badge label={data.Priority__c}
+                                                                style="background-color: green; color:white">
+                                                            </lightning-badge>
+                                                        </template>
+                                                        <template lwc:elseif={data.isYellow}>
+                                                            <lightning-badge label={data.Priority__c}
+                                                                style="background-color: yellow; color:rgb(0, 0, 0)">
+                                                            </lightning-badge>
+                                                        </template>
+                                                    </template>
+                                                </div>
+                                            </div>
+                                        </lightning-card>
+                                    </div>
+                                </template>
+                            </template>
+                        </div>
+                    </lightning-layout-item>
+                </div>
+            </div>
+            <div class="slds-scrollable" style="height: 400px;    height: 400px;width: 24%;background-color:#396faa; border-radius:5px; margin-left:5px" tabindex="0"
+            data-object="inprogress" onscroll={loadMoreData}>
+                <div class="slds-text-longform">
+                    <lightning-layout-item flexibility="auto" padding="around-small" class="custom-box"
+                        >
+                        <div class="slds-text-heading_medium" style="color:white;text-align:center;text-align:center">In Progress</div>
+                        <div id="InProgress" style="height:100%" data-role="drop-target" ondrop={handleDrop}
+                            ondragenter={handleDragEnter} ondragover={handleDragOver} ondragleave={handleDragLeave}>
+                            <template if:true={inProgressRecords}>
+                                <template for:each={inProgressRecords} for:item="data">
+                                    <div key={data.Id} draggable="true" id={data.Id} data-id={data.Id}
+                                        ondragstart={taskDragStart} ondragend={taskDragEnd} class="slds-p-around_small">
+                                        <lightning-card style="width: 50px;" variant="Narrow" title={data.Subject}>
+                                            <div class="slds-p-horizontal_small">
+                                                <div style="display: flex; justify-content:space-between">
+                                                    <template if:true={data.Task_Name__c}>
+                                                        {data.Task_Name__c}<br />
+                                                    </template>
+                                                    <lightning-icon icon-name='utility:edit' alternative-text='edit'
+                                                        size='small' title='edit' data-object={data.Id}
+                                                        data-status={data.Status__c}
+                                                        onclick={onclickpencil}>
+                                                    </lightning-icon>
+                                                </div>
+                                                <template if:true={data.Assigned_To__r.Name}>
+                                                    {data.Assigned_To__r.Name}<br />
+                                                </template>
+                                                <div style="display: flex; justify-content: space-between">
+                                                    <template if:true={data.Due_Date__c}>
+                                                        {data.Due_Date__c}<br />
+                                                    </template>
+                                                    <template if:true={data.Priority__c}>
+                                                        <template lwc:if={data.isRed}>
+                                                            <lightning-badge label={data.Priority__c}
+                                                                style="background-color: red; color:white">
+                                                            </lightning-badge>
+                                                        </template>
+                                                        <template lwc:elseif={data.isGreen}>
+                                                            <lightning-badge label={data.Priority__c}
+                                                                style="background-color: green; color:white">
+                                                            </lightning-badge>
+                                                        </template>
+                                                        <template lwc:elseif={data.isYellow}>
+                                                            <lightning-badge label={data.Priority__c}
+                                                                style="background-color: yellow; color:rgb(0, 0, 0)">
+                                                            </lightning-badge>
+                                                        </template>
+                                                    </template>
+                                                </div>
+
+                                            </div>
+                                        </lightning-card>
+                                    </div>
+                                </template>
+                            </template>
+                        </div>
+                    </lightning-layout-item>
+                </div>
+            </div>
+            <div class="slds-scrollable" style="height: 400px;height: 400px;width: 24%;background-color:#eae1d2; border-radius:5px; margin-left:5px" tabindex="0"
+            data-object="testing" onscroll={loadMoreData}>
+                <div class="slds-text-longform">
+                    <lightning-layout-item flexibility="auto" padding="around-small" class="custom-box"
+                      >
+                        <div class="slds-text-heading_medium" style="text-align:center">Testing</div>
+                        <div id="Testing" style="height:100%" data-role="drop-target" ondrop={handleDrop}
+                            ondragenter={handleDragEnter} ondragover={handleDragOver} ondragleave={handleDragLeave}>
+                            <template if:true={testingRecords}>
+                                <template for:each={testingRecords} for:item="data">
+                                    <div key={data.Id} draggable="true" id={data.Id} data-id={data.Id}
+                                        ondragstart={taskDragStart} ondragend={taskDragEnd} class="slds-p-around_small">
+                                        <lightning-card style="width: 50px;" variant="Narrow" title={data.Subject}>
+                                            <div class="slds-p-horizontal_small">
+                                                <div style="display: flex; justify-content:space-between">
+                                                    <template if:true={data.Task_Name__c}>
+                                                        {data.Task_Name__c}<br />
+                                                    </template>
+                                                    <lightning-icon icon-name='utility:edit' alternative-text='edit'
+                                                        size='small' title='edit' data-object={data.Id}
+                                                        data-status={data.Status__c}
+                                                        onclick={onclickpencil}>
+                                                    </lightning-icon>
+                                                </div>
+                                                <template if:true={data.Assigned_To__r.Name}>
+                                                    {data.Assigned_To__r.Name}<br />
+                                                </template>
+                                                <div style="display: flex; justify-content: space-between">
+                                                    <template if:true={data.Due_Date__c}>
+                                                        {data.Due_Date__c}<br />
+                                                    </template>
+                                                    <template if:true={data.Priority__c}>
+                                                        <template lwc:if={data.isRed}>
+                                                            <lightning-badge label={data.Priority__c}
+                                                                style="background-color: red; color:white">
+                                                            </lightning-badge>
+                                                        </template>
+                                                        <template lwc:elseif={data.isGreen}>
+                                                            <lightning-badge label={data.Priority__c}
+                                                                style="background-color: green; color:white">
+                                                            </lightning-badge>
+                                                        </template>
+                                                        <template lwc:elseif={data.isYellow}>
+                                                            <lightning-badge label={data.Priority__c}
+                                                                style="background-color: yellow; color:rgb(0, 0, 0)">
+                                                            </lightning-badge>
+                                                        </template>
+                                                    </template>
+                                                </div>
+                                            </div>
+                                        </lightning-card>
+                                    </div>
+                                </template>
+                            </template>
+                        </div>
+                    </lightning-layout-item>
+                </div>
+            </div>
+            <div class="slds-scrollable" style="height: 400px;height: 400px;width: 24%;background-color:#8db9aa; border-radius:5px; margin-left:5px" tabindex="0"
+            data-object="completed" onscroll={loadMoreData}>
+                <div class="slds-text-longform">
+                    <lightning-layout-item flexibility="auto" padding="around-small" class="custom-box"
+                        >
+                        <div class="slds-text-heading_medium" style="text-align:center">Completed</div>
+                        <div id="completed" style="height:100%" data-role="drop-target" ondrop={handleDrop}
+                            ondragenter={handleDragEnter} ondragover={handleDragOver} ondragleave={handleDragLeave}>
+                            <template if:true={completedRecords}>
+                                <template for:each={completedRecords} for:item="data">
+                                    <div key={data.Id} draggable="true" id={data.Id} data-id={data.Id}
+                                        ondragstart={taskDragStart} ondragend={taskDragEnd} class="slds-p-around_small">
+                                        <lightning-card style="width: 50px;" variant="Narrow" title={data.Subject}>
+                                            <div class="slds-p-horizontal_small">
+                                                <div style="display: flex; justify-content:space-between">
+                                                    <template if:true={data.Task_Name__c}>
+                                                        {data.Task_Name__c}<br />
+                                                    </template>
+                                                    <lightning-icon icon-name='utility:edit' alternative-text='edit'
+                                                        size='small' title='edit' data-object={data.Id}
+                                                        data-status={data.Status__c}
+                                                        onclick={onclickpencil}>
+                                                    </lightning-icon>
+                                                </div>
+                                                <template if:true={data.Assigned_To__r.Name}>
+                                                    {data.Assigned_To__r.Name}<br />
+                                                </template>
+                                                <div style="display: flex; justify-content: space-between">
+                                                    <template if:true={data.Due_Date__c}>
+                                                        {data.Due_Date__c}<br />
+                                                    </template>
+                                                    <template if:true={data.Priority__c}>
+                                                        <template lwc:if={data.isRed}>
+                                                            <lightning-badge label={data.Priority__c}
+                                                                style="background-color: red; color:white">
+                                                            </lightning-badge>
+                                                        </template>
+                                                        <template lwc:elseif={data.isGreen}>
+                                                            <lightning-badge label={data.Priority__c}
+                                                                style="background-color: green; color:white">
+                                                            </lightning-badge>
+                                                        </template>
+                                                        <template lwc:elseif={data.isYellow}>
+                                                            <lightning-badge label={data.Priority__c}
+                                                                style="background-color: yellow; color:rgb(0, 0, 0)">
+                                                            </lightning-badge>
+                                                        </template>
+                                                    </template>
+                                                </div>
+                                            </div>
+                                        </lightning-card>
+                                    </div>
+                                </template>
+                            </template>
+                        </div>
+                    </lightning-layout-item>
+                </div>
+            </div>
+        </lightning-layout>
+
+    </div>
+
+</template>

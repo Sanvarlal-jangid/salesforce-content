@@ -1,0 +1,171 @@
+/* Overall component container */
+.slds-p-around_medium {
+    padding: 1rem; /* Replaced var(--lwc-spacingMedium, 1rem) */
+}
+
+/* Kanban Column Styling */
+.kanban-column {
+    background-color: #f3f3f3; /* Replaced var(--lwc-colorBackground, #f3f3f3) */
+    border-radius: 0.25rem; /* Replaced var(--lwc-borderRadiusMedium, 0.25rem) */
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1); /* Replaced var(--lwc-shadowSmall, ...) */
+    height: 100%; /* Occupy full height of layout item */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Hide overflow for column header/body if content is too large */
+}
+
+.kanban-column-header {
+    font-size: 1.125rem; /* Replaced var(--lwc-fontSize1, 1.125rem) */
+    font-weight: 700; /* Replaced var(--lwc-fontWeightBold, 700) */
+    color: #181818; /* Replaced var(--lwc-colorTextLabel, #181818) */
+    text-align: center;
+    padding: 0.25rem; /* Replaced var(--lwc-spacingXxSmall, 0.25rem) */
+    border-bottom: 1px solid #dddbda; /* Replaced var(--lwc-borderColor, #dddbda) */
+    background-color: #ffffff; /* Replaced var(--lwc-colorBackgroundAlt, #ffffff) */
+    border-top-left-radius: 0.25rem; /* Replaced var(--lwc-borderRadiusMedium, 0.25rem) */
+    border-top-right-radius: 0.25rem; /* Replaced var(--lwc-borderRadiusMedium, 0.25rem) */
+    flex-shrink: 0; /* Prevent header from shrinking */
+}
+
+.kanban-column-body {
+    padding: 0.5rem; /* Replaced var(--lwc-spacingXSmall, 0.5rem) */
+    flex-grow: 1; /* Allow body to take up remaining space */
+    overflow-y: auto; /* Enable vertical scrolling for tasks if they exceed column height */
+    /* Custom scrollbar for better appearance (optional, browser dependent) */
+    scrollbar-width: thin;
+    scrollbar-color: #dddbda transparent; /* Replaced var(--lwc-colorBorder, #dddbda) */
+}
+
+.kanban-column-body::-webkit-scrollbar {
+    width: 8px;
+}
+
+.kanban-column-body::-webkit-scrollbar-thumb {
+    background-color: #dddbda; /* Replaced var(--lwc-colorBorder, #dddbda) */
+    border-radius: 10px;
+}
+
+.kanban-column-body::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+
+/* Specific column colors (optional, can be expanded) */
+.column-todo .kanban-column-header {
+    background-color: #fce883; /* Light yellow */
+}
+.column-in-progress .kanban-column-header {
+    background-color: #a7d9f7; /* Light blue */
+}
+.column-testing .kanban-column-header {
+    background-color: #c3e6cb; /* Light green */
+}
+.column-completed .kanban-column-header {
+    background-color: #d1d1d1; /* Light grey */
+}
+
+/* Task Card Styling */
+.task-card {
+    background-color: #ffffff; /* Replaced var(--lwc-colorBackgroundCard, #ffffff) */
+    border: 1px solid #dddbda; /* Replaced var(--lwc-borderColor, #dddbda) */
+    border-radius: 0.25rem; /* Replaced var(--lwc-borderRadiusMedium, 0.25rem) */
+    margin-bottom: 0.5rem; /* Replaced var(--lwc-spacingXSmall, 0.5rem) */
+    padding: 0.75rem; /* Replaced var(--lwc-spacingSmall, 0.75rem) */
+    cursor: grab;
+    transition: transform 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+    position: relative; /* For positioning the edit icon */
+}
+
+.task-card:hover {
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1), /* Replaced var(--lwc-shadowSmall, ...) */
+                0 4px 8px 0 rgba(0, 0, 0, 0.1); /* Replaced var(--lwc-shadowMedium, ...) */
+    transform: translateY(-2px);
+}
+
+.task-card.dragging {
+    opacity: 0.4;
+    border: 2px dashed #0176D3; /* Replaced var(--lwc-brandPrimary, #0176D3) */
+    background-color: #f1f7fe; /* Replaced var(--lwc-colorBackgroundPrimary, #f1f7fe) */
+}
+
+/* Drag Over effect on columns */
+.kanban-column-body.over .task-card {
+    border: 2px solid #0176D3; /* Replaced var(--lwc-brandPrimary, #0176D3) */
+}
+
+/* Task Card Header */
+.task-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem; /* Replaced var(--lwc-spacingXSmall, 0.5rem) */
+}
+
+.task-name {
+    font-size: 1rem; /* Replaced var(--lwc-fontSize2, 1rem) */
+    font-weight: 700; /* Replaced var(--lwc-fontWeightBold, 700) */
+    color: #080707; /* Replaced var(--lwc-colorTextDefault, #080707) */
+    flex-grow: 1; /* Allow name to take available space */
+    margin-right: 0.5rem; /* Replaced var(--lwc-spacingXSmall, 0.5rem) */
+}
+
+/* Priority Badges */
+.priority-badge {
+    font-size: 0.75rem; /* Replaced var(--lwc-fontSize0, 0.75rem) */
+    padding: 0.25rem 0.5rem; /* Replaced var(--lwc-spacingXxSmall, 0.25rem) and var(--lwc-spacingXSmall, 0.5rem) */
+    border-radius: 0.25rem; /* Replaced var(--lwc-borderRadiusMedium, 0.25rem) */
+    font-weight: 700; /* Replaced var(--lwc-fontWeightBold, 700) */
+    text-transform: uppercase;
+    white-space: nowrap; /* Prevent badge text from wrapping */
+}
+
+.priority-high {
+    background-color: #ea001e; /* Replaced var(--lwc-colorBackgroundDestructive, #ea001e) */
+    color: #ffffff; /* Replaced var(--lwc-colorTextInverse, #ffffff) */
+}
+
+.priority-medium {
+    background-color: #ffb75d; /* Replaced var(--lwc-colorBackgroundWarning, #ffb75d) */
+    color: #080707; /* Replaced var(--lwc-colorTextInverse, #080707) */
+}
+
+.priority-low {
+    background-color: #4bca81; /* Replaced var(--lwc-colorBackgroundSuccess, #4bca81) */
+    color: #ffffff; /* Replaced var(--lwc-colorTextInverse, #ffffff) */
+}
+
+/* Task Info */
+.task-info p {
+    font-size: 0.8125rem; /* Replaced var(--lwc-fontSize0, 0.8125rem) */
+    color: #54698d; /* Replaced var(--lwc-colorTextWeak, #54698d) */
+    margin-bottom: 0.25rem; /* Replaced var(--lwc-spacingXxSmall, 0.25rem) */
+}
+
+.task-info p:last-child {
+    margin-bottom: 0;
+}
+
+/* Edit Icon on Task Card */
+.edit-icon {
+    --slds-c-icon-color-foreground: #dddbda; /* Replaced var(--slds-c-icon-color-foreground, #dddbda) */
+    position: absolute;
+    top: 0.5rem; /* Replaced var(--lwc-spacingXSmall, 0.5rem) */
+    right: 0.5rem; /* Replaced var(--lwc-spacingXSmall, 0.5rem) */
+    z-index: 1;
+}
+
+.edit-icon:hover {
+    --slds-c-icon-color-foreground: #0070d2; /* Replaced var(--lwc-colorTextAction, #0070d2) */
+}
+
+/* Modal Styling (basic for backdrop) */
+.slds-backdrop_open {
+    /* Salesforce default backdrop styles are usually sufficient,
+       but this ensures it's opaque if needed */
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Adjust lightning-input-field margin inside modal if needed */
+.slds-modal__content lightning-input-field {
+    margin-bottom: 0.75rem; /* Replaced var(--lwc-spacingSmall, 0.75rem) */
+}

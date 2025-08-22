@@ -1,0 +1,15 @@
+<template>
+    <template if:true={typeAttributes.disabled}>
+        <lightning-button-icon 
+            icon-name="action:close" 
+            alternative-text="Linked" 
+            disabled>
+        </lightning-button-icon>
+    </template>
+    <template if:false={typeAttributes.disabled}>
+       <c-checkbox-com 
+            recordid={typeAttributes.Id}>
+       </c-checkbox-com>
+
+    </template>
+</template>

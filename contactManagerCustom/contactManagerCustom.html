@@ -1,0 +1,77 @@
+<template>
+    <lightning-card title="Contact Manager" icon-name="standard:contact">
+        <div class="slds-p-around_medium">
+            <lightning-button label="New Contact" onclick={handleNewContact} class="slds-m-right_small"></lightning-button>
+            <lightning-button label="Recently Viewed" onclick={handleRecentlyViewed}></lightning-button>
+        </div>
+
+        <div style="height: 400px;">
+             <c-custom-datatype
+            key-field="Id"
+            data={contacts}
+            columns={columns}  
+            onrowaction={handleRowAction}>
+        </c-custom-datatype>
+        </div>
+
+       
+        <!-- View Modal -->   
+        <template if:true={showViewModal}>
+            <section role="dialog" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <h2 class="slds-modal__title">Contact Details</h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium">
+                        <lightning-record-view-form record-id={selectedRecordId} object-api-name="Contact">
+                            <div class="slds-grid slds-wrap">
+                                <div class="slds-col slds-size_1-of-2">
+                                    <lightning-output-field field-name="FirstName"></lightning-output-field>
+                                    <lightning-output-field field-name="Email"></lightning-output-field>
+                                </div>
+                                <div class="slds-col slds-size_1-of-2">
+                                    <lightning-output-field field-name="LastName"></lightning-output-field>
+                                    <lightning-output-field field-name="Phone"></lightning-output-field>
+                                </div>
+                            </div>
+                        </lightning-record-view-form>
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <lightning-button variant="neutral" label="Close" onclick={closeModal}></lightning-button>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+
+        <!-- Edit Modal -->
+        <template if:true={showEditModal}>
+            <section role="dialog" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <h2 class="slds-modal__title">Edit Contact</h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium">
+                        <lightning-record-edit-form record-id={selectedRecordId} object-api-name="Contact" onsuccess={handleSuccess}>
+                            <div class="slds-grid slds-wrap">
+                                <div class="slds-col slds-size_1-of-2">
+                                    <lightning-input-field field-name="FirstName"></lightning-input-field>
+                                    <lightning-input-field field-name="Email"></lightning-input-field>
+                                </div>
+                                <div class="slds-col slds-size_1-of-2">
+                                    <lightning-input-field field-name="LastName"></lightning-input-field>
+                                    <lightning-input-field field-name="Phone"></lightning-input-field>
+                                </div>
+                            </div>
+                            <div class="slds-m-top_medium">
+                                <lightning-button type="submit" label="Save" variant="brand"></lightning-button>
+                                <lightning-button label="Cancel" onclick={closeModal} class="slds-m-left_small"></lightning-button>
+                            </div>
+                        </lightning-record-edit-form>
+                    </div>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+    </lightning-card>
+</template>

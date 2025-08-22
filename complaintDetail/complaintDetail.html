@@ -1,0 +1,29 @@
+<template>
+    <lightning-card title="Complaint Details">
+        <lightning-progress-indicator current-step={statusStep} type="base" variant="base">
+            <lightning-progress-step label="New" value="New"></lightning-progress-step>
+            <lightning-progress-step label="Working" value="Working"></lightning-progress-step>
+            <lightning-progress-step label="Escalated" value="Escalated"></lightning-progress-step>
+            <lightning-progress-step label="Closed" value="Closed"></lightning-progress-step>
+        </lightning-progress-indicator>
+
+      <lightning-progress-indicator current-step={statusStep} type="path" variant="base">
+       <lightning-progress-step label="New" value="New"></lightning-progress-step>
+            <lightning-progress-step label="Working" value="Working"></lightning-progress-step>
+            <lightning-progress-step label="Escalated" value="Escalated"></lightning-progress-step>
+            <lightning-progress-step label="Closed" value="Closed"></lightning-progress-step>
+    </lightning-progress-indicator>
+
+        <template if:true={recordId}>
+            <lightning-record-view-form record-id={recordId} object-api-name="Case">
+                <lightning-output-field field-name="ContactId"></lightning-output-field>
+                <lightning-output-field field-name="Product__c"></lightning-output-field>
+                <lightning-output-field field-name="Subject"></lightning-output-field>
+                <lightning-output-field field-name="CreatedDate"></lightning-output-field>
+                <lightning-output-field field-name="Description"></lightning-output-field>
+            </lightning-record-view-form>
+
+            <c-complaint-comments record-id={recordId}></c-complaint-comments>
+        </template>
+    </lightning-card>
+</template>
