@@ -1,0 +1,32 @@
+<template>
+    <lightning-card title="Cyntexa Campus Recruitment">
+
+        
+            <template for:each={groupedData} for:item="college">
+                <lightning-accordion allow-multiple-sections-open key={college.name}>
+                    <lightning-accordion-section name={college.name} label={college.name}>
+                      
+                        <template for:each={college.years} for:item="year">
+                            <lightning-accordion-section name={year.year} label={year.year} key={year.year}>
+                              
+                                <template for:each={year.profiles} for:item="profile">
+                                    <lightning-accordion-section name={profile.name} label={profile.name} key={profile.name}>
+                                 
+                                        <lightning-datatable
+                                            key-field="id"
+                                            data={profile.students}
+                                            columns={columns}
+                                            hide-checkbox-column>
+                                        </lightning-datatable>
+                                    </lightning-accordion-section>
+                                </template>
+                            </lightning-accordion-section>
+                        </template>
+                    </lightning-accordion-section>
+                </lightning-accordion>
+            </template>
+        
+
+
+    </lightning-card>
+</template>
