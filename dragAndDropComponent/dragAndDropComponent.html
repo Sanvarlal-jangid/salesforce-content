@@ -1,0 +1,193 @@
+<template>
+    <lightning-layout multiple-rows="true" class="x-large">
+
+        <!-- TO DO -->
+        <lightning-layout-item size="3" padding="around-small" class="custom-box">
+            <div class="slds-text-heading_large">To Do</div>
+            <div class="drop-zone"
+                 data-id="ToDo"
+                 style="min-height: 300px;"
+                 ondrop={handleDrop}
+                 ondragenter={handleDragEnter}
+                 ondragover={handleDragOver}
+                 ondragleave={handleDragLeave}>
+
+                <template for:each={tasktodoList} for:item="data">
+                    <div key={data.Id}
+                         draggable="true"
+                         data-id={data.Id}
+                         ondragstart={taskDragStart}
+                         ondragend={taskDragEnd}
+                         class="slds-p-around_small">
+                        <lightning-card variant="Narrow" style="padding: 10px;">
+                            <div class="slds-p-around_medium">
+                                <div class="slds-grid slds-grid_align-spread">
+                                    <h2>{data.Name}</h2>
+                                    <lightning-button-icon icon-name="utility:edit"
+                                                           alternative-text="Edit"
+                                                           onclick={handleEditClick}>
+                                    </lightning-button-icon>
+                                </div>
+                                <p>{data.Assigned_To}</p>
+                                <div class="slds-grid slds-grid_align-spread">
+                                    <p>{data.Due_Date__c}</p>
+                                    <span class={data.PriorityClass}>{data.Priority__c}</span>
+                                </div>
+                            </div>
+                        </lightning-card>
+                    </div>
+                </template>
+            </div>
+        </lightning-layout-item>
+
+        <!-- IN PROGRESS -->
+        <lightning-layout-item size="3" padding="around-small" class="custom-box2">
+            <div class="slds-text-heading_large">In Progress</div>
+            <div class="drop-zone"
+                 data-id="InProgress"
+                 style="min-height: 300px;"
+                 ondrop={handleDrop}
+                 ondragenter={handleDragEnter}
+                 ondragover={handleDragOver}
+                 ondragleave={handleDragLeave}>
+
+                <template for:each={taskInProgressList} for:item="data">
+                    <div key={data.Id}
+                         draggable="true"
+                         data-id={data.Id}
+                         ondragstart={taskDragStart}
+                         ondragend={taskDragEnd}
+                         class="slds-p-around_small">
+                        <lightning-card variant="Narrow" style="padding: 10px;">
+                            <div class="slds-p-around_medium">
+                                <div class="slds-grid slds-grid_align-spread">
+                                    <h2>{data.Name}</h2>
+                                    <lightning-button-icon icon-name="utility:edit"
+                                                           alternative-text="Edit"
+                                                           onclick={handleEditClick}>
+                                    </lightning-button-icon>
+                                </div>
+                                <p>{data.Assigned_To}</p>
+                                <div class="slds-grid slds-grid_align-spread">
+                                    <p>{data.Due_Date__c}</p>
+                                    <span class={data.PriorityClass}>{data.Priority__c}</span>
+                                </div>
+                            </div>
+                        </lightning-card>
+                    </div>
+                </template>
+            </div>
+        </lightning-layout-item>
+
+        <!-- TESTING -->
+        <lightning-layout-item size="3" padding="around-small" class="custom-box3">
+            <div class="slds-text-heading_large">Testing</div>
+            <div class="drop-zone"
+                 data-id="Testing"
+                 style="min-height: 300px;"
+                 ondrop={handleDrop}
+                 ondragenter={handleDragEnter}
+                 ondragover={handleDragOver}
+                 ondragleave={handleDragLeave}>
+
+                <template for:each={taskintestingList} for:item="data">
+                    <div key={data.Id}
+                         draggable="true"
+                         data-id={data.Id}
+                         ondragstart={taskDragStart}
+                         ondragend={taskDragEnd}
+                         class="slds-p-around_small">
+                        <lightning-card variant="Narrow" style="padding: 10px;">
+                            <div class="slds-p-around_medium">
+                                <div class="slds-grid slds-grid_align-spread">
+                                    <h2>{data.Name}</h2>
+                                    <lightning-button-icon icon-name="utility:edit"
+                                                           alternative-text="Edit"
+                                                           onclick={handleEditClick}>
+                                    </lightning-button-icon>
+                                </div>
+                                <p>{data.Assigned_To}</p>
+                                <div class="slds-grid slds-grid_align-spread">
+                                    <p>{data.Due_Date__c}</p>
+                                    <span class={data.PriorityClass}>{data.Priority__c}</span>
+                                </div>
+                            </div>
+                        </lightning-card>
+                    </div>
+                </template>
+            </div>
+        </lightning-layout-item>
+
+        <!-- COMPLETED -->
+        <lightning-layout-item size="3" padding="around-small" class="custom-box4">
+            <div class="slds-text-heading_large">Completed</div>
+            <div class="drop-zone"
+                 data-id="Completed"
+                 style="min-height: 300px;"
+                 ondrop={handleDrop}
+                 ondragenter={handleDragEnter}
+                 ondragover={handleDragOver}
+                 ondragleave={handleDragLeave}>
+
+                <template for:each={taskCompletedList} for:item="data">
+                    <div key={data.Id}
+                         draggable="true"
+                         data-id={data.Id}
+                         ondragstart={taskDragStart}
+                         ondragend={taskDragEnd}
+                         class="slds-p-around_small">
+                        <lightning-card variant="Narrow" style="padding: 10px;">
+                            <div class="slds-p-around_medium">
+                                <div class="slds-grid slds-grid_align-spread">
+                                    <h2>{data.Name}</h2>
+                                    <lightning-button-icon icon-name="utility:edit"
+                                                           alternative-text="Edit"
+                                                           onclick={handleEditClick}>
+                                    </lightning-button-icon>
+                                </div>
+                                <p>{data.Assigned_To}</p>
+                                <div class="slds-grid slds-grid_align-spread">
+                                    <p>{data.Due_Date__c}</p>
+                                    <span class={data.PriorityClass}>{data.Priority__c}</span>
+                                </div>
+                            </div>
+                        </lightning-card>
+                    </div>
+                </template>
+            </div>
+        </lightning-layout-item>
+
+    </lightning-layout>
+    
+    <!-- Modal -->
+    <template if:true={showModal}>
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <h2 class="slds-modal__title">Edit Task</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium">
+                    <lightning-record-edit-form object-api-name="Project_Task__c"
+                                                record-id={selectedRecordId}
+                                                onsuccess={handleSaveSuccess}
+                                                oncancel={closeModal}>
+                        <lightning-messages></lightning-messages>
+
+                        <lightning-input-field field-name="Name"></lightning-input-field>
+                        <lightning-input-field field-name="Status__c"></lightning-input-field>
+                        <lightning-input-field field-name="Assigned_To__c"></lightning-input-field>
+                        <lightning-input-field field-name="Due_Date__c"></lightning-input-field>
+                        <lightning-input-field field-name="Priority__c"></lightning-input-field>
+
+                        <div class="slds-modal__footer">
+                            <lightning-button variant="neutral" label="Cancel" onclick={closeModal}></lightning-button>
+                            <lightning-button variant="brand" type="submit" label="Save"></lightning-button>
+                        </div>
+                    </lightning-record-edit-form>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+    
+</template>

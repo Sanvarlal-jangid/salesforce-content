@@ -1,0 +1,75 @@
+<template>
+    <lightning-card title="Opportunity Records">
+        <div class="slds-tabs_default">
+            <ul class="slds-tabs_default__nav" role="tablist">
+                <li class="slds-tabs_default__item" title="All Opportunities" role="presentation">
+                    <a class="slds-tabs_default__link" href="#" role="tab" tabindex="0"
+                        aria-selected={allOpportunitiesSelected} aria-controls="tab-all"
+                        data-value="All Opportunities" onclick={handleTabClick}>All Opportunities</a>
+                </li>
+                <template for:each={picklistValues} for:item="tabValue">
+                    <li class="slds-tabs_default__item" title={tabValue} role="presentation" key={tabValue}>
+                        <a class="slds-tabs_default__link" href="#" role="tab" tabindex="-1"
+                            aria-selected={selectedTab} aria-controls={tabValue} data-value={tabValue}
+                            onclick={handleTabClick}>{tabValue}</a>
+                    </li>
+                </template>
+            </ul>
+        </div>
+
+        <div class="slds-p-around_medium">
+            <div class="slds-align_absolute-end slds-p-bottom_small">
+                <lightning-button label="Refresh" icon-name="utility:refresh" onclick={handleRefresh} class="slds-m-right_small"></lightning-button>
+                <lightning-button label="Add" icon-name="utility:add" onclick={handleAddOpportunity}></lightning-button>
+            </div>
+
+            <template if:true={opportunities}>
+                <lightning-datatable
+                    key-field="Id"
+                    data={opportunities}
+                    columns={columns}
+                    onsave={handleSave}
+                    sorted-by={sortedBy}
+                    sorted-direction={sortedDirection}
+                    onsort={handleSort}
+                    enable-infinite-loading
+                    onloadmore={handleLoadMore}>
+                </lightning-datatable>
+            </template>
+            <template if:false={opportunities}>
+                <p>No opportunities to display for the selected tab.</p>
+            </template>
+            <template if:true={error}>
+                <p class="slds-text-color_error">Error: {error}</p>
+            </template>
+        </div>
+
+        <template if:true={showModal}>
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={handleCancelModal}>
+                            <lightning-icon icon-name="utility:close"
+                                alternative-text="Close"
+                                variant="inverse"
+                                size="small"></lightning-icon>
+                            <span class="slds-assistive-text">Close</span>
+                        </button>
+                        <h2 id="modal-heading-01" class="slds-modal__title slds-text-heading_medium slds-hyphenate">Add New Opportunity</h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                        <lightning-input-field field-name="Name" value={newOpportunity.Name} onchange={handleNewOpportunityChange}></lightning-input-field>
+                        <lightning-input-field field-name={picklistFieldApiName} value={newOpportunityPicklistValue} onchange={handleNewOpportunityPicklistChange}></lightning-input-field>
+                        <lightning-input-field field-name="CloseDate" type="date" value={newOpportunity.CloseDate} onchange={handleNewOpportunityChange}></lightning-input-field>
+                        <lightning-input-field field-name="StageName" value={newOpportunity.StageName} onchange={handleNewOpportunityChange}></lightning-input-field>
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <lightning-button label="Cancel" onclick={handleCancelModal}></lightning-button>
+                        <lightning-button label="Save" variant="brand" onclick={handleSaveNewOpportunity} class="slds-m-left_x-small"></lightning-button>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+    </lightning-card>
+</template>

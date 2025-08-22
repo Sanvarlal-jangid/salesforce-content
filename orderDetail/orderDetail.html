@@ -1,0 +1,13 @@
+<template>
+    <lightning-card title="Order Status Dashboard">
+        <template if:true={order}>
+            <p class="slds-p-horizontal_medium">Order ID: {order.orderId}</p>
+            <p class="slds-p-horizontal_medium">Customer: {order.customerName}</p>
+            <p class="slds-p-horizontal_medium">Item: {order.item}</p>
+            <p class="slds-p-horizontal_medium">Quantity: {order.quantity}</p>
+        </template>
+        <template if:false={order}>
+            <p class="slds-p-horizontal_medium">No orders yet.</p>
+        </template>
+    </lightning-card>
+</template>

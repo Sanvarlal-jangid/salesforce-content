@@ -1,0 +1,72 @@
+<template>
+        <lightning-card title="Progress Filter">
+                <div class="slds-grid ">
+                        <div class="slds-col slds-var-m-around_medium"> <lightning-combobox name="progress"
+                                        label="Category"  required="true" placeholder="Select Progress" options={options}
+                                        onchange={handleCategory}> </lightning-combobox></div>
+
+                        <div class="slds-col slds-var-m-around_medium"> <lightning-combobox name="progress" required="true"
+                                        label="Sort by Price" options={Option}
+                                        onchange={handlePrice}></lightning-combobox></div>
+
+                        <div class="slds-col slds-var-m-around_medium"><lightning-combobox name="progress"
+                                        label="Sort by Rating" required="true" options={Option}
+                                        onchange={handleRating}></lightning-combobox></div>
+                        <div class="slds-col slds-m-left_xx-large" style="align-content: center;
+    margin-top: 20px;">
+                                <lightning-button variant="brand" onclick={applyFilters}
+                                        style="--sds-c-button-brand-color-background: #ecbd22; --sds-c-button-text-color: #f4f7f9;"
+                                        label="Apply filter"> </lightning-button>
+                        </div>
+                </div>
+
+
+        </lightning-card>
+
+        <!-- Product List -->
+        <div class="slds-grid slds-wrap">
+                <template if:true={Productarr}>
+                        <template for:each={Productarr} for:item="product">
+                                <div key={product.id} class=" slds-box slds-m-around_small"
+                                        style="    text-align: center;">
+                                        <h3 style="font-size: medium;
+    font-weight: 600;">{product.name}</h3>
+                                        <img src={product.image} alt="" srcset="" style="    width: 200px;
+    height: 120px;
+    border-radius: 10px;">
+                                        <p><strong>Price:</strong> ${product.price}</p>
+                                        <p><strong>Rating:</strong> {product.rating}</p>
+                                        <p><strong>Status:</strong> {product.stockStatus}</p>
+                                        <lightning-button label="View Detail" value={product} onclick={handleViewDetail}
+                                                class="slds-m-top_x-small"
+                                                style="--sds-c-button-brand-color-background: #0ee6ee; --sds-c-button-text-color: #f4f7f9;"
+                                                variant="brand">
+                                        </lightning-button>
+                                </div>
+                        </template>
+                </template>
+        </div>
+
+
+        <!-- Modal -->
+        <template if:true={showModal}>
+                <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+                        <div class="slds-modal__container">
+                                <header class="slds-modal__header">
+                                        <h2 class="slds-text-heading_medium">{selectedProduct.name}</h2>
+                                </header>
+                                <div class="slds-modal__content">
+                                        <p><strong>Price:</strong> ${selectedProduct.price}</p>
+                                        <p><strong>Description:</strong> {selectedProduct.description}</p>
+                                        <p><strong>Stock Status:</strong> {selectedProduct.stockStatus}</p>
+                                </div>
+                                <footer class="slds-modal__footer">
+                                        <lightning-button variant="neutral" label="Close" onclick={handleCloseModal}>
+                                        </lightning-button>
+                                </footer>
+                        </div>
+                </section>
+                <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+
+</template>

@@ -1,0 +1,45 @@
+<template>
+    <lightning-card icon-name="standard:account" variant="base">
+    <div class="slds-tabs_default">
+            <ul class="slds-tabs_default__nav" role="tablist">
+                <li class="slds-tabs_default__item" title="All Opportunities" role="presentation">
+                    <a class="slds-tabs_default__link" href="#" role="tab" tabindex="0"
+                        aria-selected={allOpportunitiesSelected} aria-controls="tab-all"
+                        data-value="All Opportunities" onclick={handleTabClick}>All Opportunities</a>
+                </li>
+                <template for:each={picklistValues} for:item="tabValue">
+                    <li class="slds-tabs_default__item" title={tabValue} role="presentation" key={tabValue}>
+                        <a class="slds-tabs_default__link" href="#" role="tab" tabindex="-1"
+                            aria-selected={selectedTab} aria-controls={tabValue} data-value={tabValue}
+                            onclick={handleTabClick}>{tabValue}</a>
+                    </li>
+                </template>
+            </ul>
+        </div>
+
+           <div class="slds-p-around_medium">
+            <div class="slds-align_absolute-end slds-p-bottom_small">
+                <lightning-button label="Refresh" icon-name="utility:refresh" onclick={handleRefresh} class="slds-m-right_small"></lightning-button>
+                <lightning-button label="Add" icon-name="utility:add" onclick={createOpportunity}></lightning-button>
+            </div>
+   
+             <template if:true={Allopportunities}>
+          <lightning-datatable
+                    key-field="Id"
+                    data={Allopportunities}
+                    columns={columns}
+                    sorted-by={sortBy}  
+                    sorted-direction={sortDirection}
+                    onsort={doSorting}
+                      onsave={handleSave}
+                 >
+                </lightning-datatable>
+            </template>
+   
+          
+            <template if:true={error}>
+                <p class="slds-text-color_error">Error: {error}</p>
+            </template>
+        </div>
+    </lightning-card>
+</template>

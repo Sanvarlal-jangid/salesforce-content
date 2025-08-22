@@ -1,0 +1,50 @@
+<template>
+    <lightning-card title="Account Details">
+        <lightning-accordion allow-multiple-sections-open active-section-name={activeSectionName}>
+            <template for:each={accounts} for:item="account">
+                <lightning-accordion-section key={account.Id} name={account.Id} label={account.Name}>
+
+                    <!-- Working button that opens this section -->
+                    <lightning-button slot="actions"
+                                      label="edit"
+                                      onclick={handleedit}
+                                      data-object={account.Id}>
+                    </lightning-button>
+                        <lightning-button slot="actions"
+                                      label="delete"
+                                      onclick={handledelete}
+                                    data-object={account.Id}>
+
+                    </lightning-button>
+
+                    <!-- Contacts Section -->
+                    <template if:true={account.Contacts}>
+                        <lightning-accordion-section name={account.Id} label="Contacts">
+                            <template for:each={account.Contacts} for:item="contact">
+                                <div key={contact.Id} class="golu">
+                                    <p>{contact.LastName}</p>
+                                    <lightning-button label="Delete" title="Non-primary action"
+                                        onclick={handledelete} class="slds-m-left_x-small"
+                                        data-object={contact.Id}>
+                                    </lightning-button>
+                                </div>
+                            </template>
+                        </lightning-accordion-section>
+                    </template>
+
+                    <!-- Opportunities Section -->
+                    <template if:true={account.Opportunities}>
+                        <lightning-accordion-section name={account.Id} label="Opportunities">
+                            <template for:each={account.Opportunities} for:item="opportunity">
+                                <div key={opportunity.Id} class="golu">
+                                    <p>{opportunity.Name}</p>
+                                </div>
+                            </template>
+                        </lightning-accordion-section>
+                    </template>
+
+                </lightning-accordion-section>
+            </template>
+        </lightning-accordion>
+    </lightning-card>
+</template>

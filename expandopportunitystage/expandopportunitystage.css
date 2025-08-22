@@ -1,0 +1,18 @@
+.stage-header {
+    background: #0176d3;
+    color: white;
+    padding: 8px;
+ 
+    margin: 4px 0;
+    cursor: pointer;
+}
+.stage-block {
+    margin-bottom: 10px;
+}
+.hidden-button {
+ display: none; 
+}
+
+tr:hover .hidden-button {
+  display: block; 
+}

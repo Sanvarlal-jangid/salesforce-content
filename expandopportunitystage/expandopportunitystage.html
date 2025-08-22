@@ -1,0 +1,92 @@
+<template>
+    <lightning-card title="Opportunities by Stage" icon-name="standard:opportunity">
+        <div class="slds-m-around_medium">
+            <template for:each={displayStages} for:item="stageData">
+                <div key={stageData.name} class="stage-block slds-m-bottom_small">
+                    <div class=" slds-p-around_small slds-theme_alt-inverse" onclick={toggleStage}
+                        data-stage={stageData.name} style="cursor: pointer;">
+                        {stageData.name}
+                    </div>
+
+                    <template lwc:if={stageData.isExpanded}>
+                        <div class="slds-box slds-m-top_x-small">
+                            <table class="slds-table slds-table_bordered slds-table_cell-buffer slds-no-row-hover">
+                                <thead>
+                                    <tr class="slds-text-title_caps">
+                                        <th scope="col">
+                                            <div class="slds-truncate" title="Opportunity Name">Name</div>
+                                        </th>
+                                        <th scope="col">
+                                            <div class="slds-truncate" title="Amount">Amount</div>
+                                        </th>
+                                        <th scope="col">
+                                            <div class="slds-truncate" title="Actions">Actions</div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <template for:each={stageData.opportunities} for:item="opp">
+                                        <tr key={opp.Id}>
+                                            <td>
+                                                <div class="slds-truncate" title={opp.Name}>{opp.Name}</div>
+                                            </td>
+                                            <td>
+                                                <div class="slds-truncate" title={opp.Amount}>
+                                                    <lightning-formatted-number value={opp.Amount}
+                                                        format-style="currency"></lightning-formatted-number></div>
+                                            </td>
+                                            <td>
+                                                <div style="display:flex">
+                                                    <lightning-icon icon-name="utility:edit" alternative-text="Edit"
+                                                        size="small" data-id={opp.Id} onclick={editRecord}
+                                                        class="slds-m-right_x-small hidden-button">
+                                                    </lightning-icon>
+                                                     <lightning-icon icon-name="utility:delete" alternative-text="delete"
+                                                        size="small" data-id={opp.Id} onclick={deleteRecord}
+                                                        class="slds-m-right_x-small hidden-button">
+                                                    </lightning-icon>
+                                                
+                                                </div>
+
+                                            </td>
+                                        </tr>
+                                    </template>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </template>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+
+    <template if:true={isModalOpen}>
+        <section role="dialog" tabindex="-1" aria-modal="true" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <h2 class="slds-text-heading_medium slds-hyphenate">Edit Opportunity</h2>
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                        title="Close" onclick={closeModal}>
+                        <lightning-icon icon-name="utility:close" size="small" variant="inverse"></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium">
+                    <lightning-input label="Opportunity Name" value={editRecordData.Name} data-field="Name"
+                        onchange={handleInputChange}>
+                    </lightning-input>
+                    <lightning-input type="number" label="Amount" value={editRecordData.Amount} data-field="Amount"
+                        onchange={handleInputChange}>
+                    </lightning-input>
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning-button label="Cancel" onclick={closeModal}></lightning-button>
+                    <lightning-button label="Save" onclick={saveRecord} variant="brand"
+                        class="slds-m-left_x-small"></lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

@@ -1,0 +1,83 @@
+<template>
+    <lightning-card title="E-Learning Quiz">
+        <div class="slds-m-around_medium">
+            <template lwc:if={form}>
+                <lightning-input label="First Name" onchange={handleInputChangeF} class="firstname"></lightning-input>
+                <lightning-input label="Last Name" onchange={handleInputChangeL} class="lastname"></lightning-input>
+                <lightning-input type="email" label="Email" onchange={handleInputChangeE}
+                    class="email"></lightning-input>
+                <lightning-button label="Save" onclick={handleSave} class="save slds-m-top_medium"></lightning-button>
+            </template>
+
+            <template lwc:if={quizStarted}>
+              
+                <div class="slds-text-heading_large slds-m-bottom_medium current-active-question">
+                    {question.Name}
+                </div>
+
+                <div class="option-for-current-question">
+                    <input type="radio" name="quizOption" value="A" onchange={handleOptionSelect}
+                        checked={isOptionAChecked}>
+                    <label>{question.OptionA__c}</label>
+                </div>
+                <div class="option-for-current-question">
+                    <input type="radio" name="quizOption" value="B" onchange={handleOptionSelect}
+                        checked={isOptionBChecked}>
+                    <label>{question.OptionB__c}</label>
+                </div>
+                <div class="option-for-current-question">
+                    <input type="radio" name="quizOption" value="C" onchange={handleOptionSelect}
+                        checked={isOptionCChecked}>
+                    <label>{question.OptionC__c}</label>
+                </div>
+                <div class="option-for-current-question">
+                    <input type="radio" name="quizOption" value="D" onchange={handleOptionSelect}
+                        checked={isOptionDChecked}>
+                    <label>{question.OptionD__c}</label>
+                </div>
+
+                <div class="slds-m-top_medium">
+                    <lightning-button label="Previous" onclick={handlePrevious} disabled={isFirstQuestionQuiz}
+                        class="quiz-previous-button slds-m-right_small"></lightning-button>
+                    <lightning-button label="Next" onclick={handleNext} class="quiz-next-question"></lightning-button>
+                    <lightning-button label="Finish" onclick={handleFinish} lwc:if={showFinish}
+                        class="finish-button slds-m-left_small"></lightning-button>
+                </div>
+            </template>
+
+            <template lwc:if={showScore}>
+                <div class="slds-text-heading_large slds-m-bottom_medium">Your Score: {score} / {quizQuestions.length}
+                </div>
+                <lightning-button label="Review Answers" onclick={handleSeeAnswers}
+                    class="see-answers"></lightning-button>
+            </template>
+
+            <template lwc:if={showReview}>
+                <div class="slds-m-around_medium">
+                    <h2 class="slds-text-heading_large slds-m-bottom_large">Your Score: {score} / {quizQuestions.length}
+                    </h2>
+
+                    <template for:each={reviewData} for:item="q">
+                        <div key={q.Id} class="slds-box slds-theme_default slds-m-top_medium">
+                            <h3 class="slds-text-heading_medium slds-m-bottom_small">{q.Name}</h3>
+
+                            <template for:each={q.reviewOptions} for:item="option">
+                                <p key={option.value} class={option.class}>
+                                    {option.value}. {option.label} </p>
+                            </template>
+                           
+
+                           
+                        </div>
+                        
+                                <p key={q.id}><span class="result-user-answer"> selected by user {q.selected}</span>
+                                </p>
+                         <p key={q.id}><span class="result-correct-answer">correct
+                                    answer{q.Correct_Answer__c}</span></p>
+
+                    </template>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>

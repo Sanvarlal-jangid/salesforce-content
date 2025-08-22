@@ -1,0 +1,7 @@
+.golu{
+       margin-top: 20px;
+    border: 1px solid grey;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}

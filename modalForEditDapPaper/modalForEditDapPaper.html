@@ -1,0 +1,27 @@
+<template>
+    <lightning-modal-header label="My Modal Heading"></lightning-modal-header>
+    <lightning-modal-body>
+        <lightning-record-edit-form object-api-name="Project_Task__c" record-id={content}>
+            <lightning-input-field field-name="Task_Name__c" required="true" class="taskname">
+            </lightning-input-field>
+            <lightning-input-field field-name="Status__c" required="true" class="status"> </lightning-input-field>
+            <lightning-input-field field-name="Assigned_To__c" required="true" class="assigendto"> </lightning-input-field>
+            <lightning-input-field field-name="Due_Date__c" required="true" class="duedate"> </lightning-input-field>
+            <lightning-input-field field-name="Priority__c" required="true" class="priority"> </lightning-input-field>
+            <lightning-input-field field-name="Project__c" required="true" class="project"> </lightning-input-field>
+            <!-- <template for:each={fileds} for:item="field">
+                <div key={field.name}>
+                    <lightning-input-field field-name={field.name} required="true" class="project"> 
+                    </lightning-input-field>
+                </div>
+
+            </template> -->
+            <div class="slds-var-m-top_medium">
+                <lightning-button variant="brand" type="submit" label="Save" onclick={onclicksave}>
+                </lightning-button>
+                <lightning-button variant="brand" label="Cancel" onclick={cancelClick} class="slds-m-left_medium"> 
+                </lightning-button>
+            </div>
+        </lightning-record-edit-form>
+    </lightning-modal-body>
+</template>

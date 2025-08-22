@@ -1,0 +1,31 @@
+<template>
+    <lightning-card title="Relationship Viewer">
+        <div class="slds-p-around_medium">
+            <lightning-button label="Expand All" onclick={handleExpandAll}></lightning-button>
+        </div>
+
+        <lightning-accordion allow-multiple-sections-open active-section-name={activeSections}>
+            <template for:each={relatedData} for:item="section">
+                <lightning-accordion-section key={section.key} name={section.key} label={section.key}>
+                    <div class="slds-grid slds-grid_align-spread slds-p-around_small">
+                        <lightning-button label="New" onclick={handleNew} data-object={section.key}></lightning-button>
+                        <lightning-button label="View All" onclick={handleViewAll} data-object={section.key}></lightning-button>
+                    </div>
+
+                    <template for:each={section.records} for:item="record">
+                        <div key={record.Id} class="slds-box slds-m-around_x-small slds-grid slds-grid_align-spread">
+                            <div>
+                                <p>{record.Name}</p>
+                                <!-- <a href={"/" + record.Id} target="_blank" class="slds-text-heading_small">{record.Name}</a> -->
+                            </div>
+                            <div>
+                                <lightning-button-icon icon-name="utility:edit" alternative-text="Edit" onclick={handleEdit} data-id={record.Id}></lightning-button-icon>
+                                <lightning-button-icon icon-name="utility:copy" alternative-text="Copy Link" onclick={handleCopyLink} data-id={record.Id}></lightning-button-icon>
+                            </div>
+                        </div>
+                    </template>
+                </lightning-accordion-section>
+            </template>
+        </lightning-accordion>
+    </lightning-card>
+</template>

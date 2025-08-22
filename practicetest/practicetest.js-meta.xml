@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>58.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__AppPage</target>
+        <target>lightning__RecordPage</target>
+        <target>lightning__HomePage</target>
+    </targets>
+    <targetConfigs>
+        
+        <targetConfig targets="lightning__AppPage,lightning__RecordPage,lightning__HomePage">
+            <property type="String" name="picklistFieldApiName" label="Opportunity Picklist Field API Name" description="API name of the picklist field on Opportunity to use for tabs (e.g., StageName)"/>
+            <property type="String" name="fieldSetName" label="Opportunity Field Set Name" description="API name of the Field Set on Opportunity to use for table columns (e.g., MyOpportunityFields)"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

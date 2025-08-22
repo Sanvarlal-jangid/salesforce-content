@@ -1,0 +1,186 @@
+
+<template>
+    <lightning-card title="Create Opportunity" icon-name="standard:opportunity">
+        <div class="slds-m-around_medium">
+            <!-- Account and Contact Section -->
+            <div class="slds-grid slds-wrap slds-gutters_small">
+                <div class="slds-col slds-size_1-1 slds-medium-size_1-2">
+                    <lightning-combobox
+                        name="account"
+                        label="Account"
+                        value={selectedAccountId}
+                        placeholder="Select an Account"
+                        options={accountOptions}
+                        onchange={handleAccountChange}
+                        required
+                    ></lightning-combobox>
+                </div>
+                <div class="slds-col slds-size_1-1 slds-medium-size_1-2">
+                    <lightning-combobox
+                        name="contact"
+                        label="Contact"
+                        value={selectedContactId}
+                        placeholder="Select a Contact"
+                        options={contactOptions}
+                        onchange={handleContactChange}
+                        disabled={isContactDisabled}
+                    ></lightning-combobox>
+                </div>
+            </div>
+
+            <!-- Pricebook and Closed Date Section -->
+            <div class="slds-grid slds-wrap slds-gutters_small slds-m-top_medium">
+                <div class="slds-col slds-size_1-1 slds-medium-size_1-2">
+                    <lightning-combobox
+                        name="pricebook"
+                        label="Pricebook"
+                        value={selectedPricebookId}
+                        placeholder="Select a Pricebook"
+                        options={pricebookOptions}
+                        onchange={handlePricebookChange}
+                        required
+                    ></lightning-combobox>
+                </div>
+                <div class="slds-col slds-size_1-1 slds-medium-size_1-2">
+                    <lightning-input
+                        type="date"
+                        label="Closed Date"
+                        value={closedDate}
+                        onchange={handleClosedDateChange}
+                        required
+                    ></lightning-input>
+                </div>
+            </div>
+
+            <!-- Contact Details Display -->
+            <template if:true={selectedContactId}>
+                <div class="slds-box slds-box_x-small slds-theme_alt-inverse slds-m-top_medium">
+                    <p><strong>Email:</strong> {contactEmail}</p>
+                    <p><strong>Phone:</strong> {contactPhone}</p>
+                    <p><strong>Fax:</strong> {contactFax}</p>
+                </div>
+            </template>
+
+            <!-- Opportunity Line Items Table -->
+            <div class="slds-m-top_large">
+                <h2 class="slds-text-heading_medium slds-m-bottom_medium">Opportunity Line Items</h2>
+
+                <div class="slds-scrollable_x">
+                    <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped">
+                        <thead>
+                            <tr class="slds-line-height_reset">
+                                <th scope="col">
+                                    <div class="slds-truncate" title="Nr.">Nr.</div>
+                                </th>
+                                <th scope="col">
+                                    <div class="slds-truncate" title="Product">Product</div>
+                                </th>
+                                <th scope="col">
+                                    <div class="slds-truncate" title="Quantity">Quantity</div>
+                                </th>
+                                <th scope="col">
+                                    <div class="slds-truncate" title="Unit Price">Unit Price</div>
+                                </th>
+                                <th scope="col">
+                                    <div class="slds-truncate" title="List Price">List Price</div>
+                                </th>
+                                <th scope="col">
+                                    <div class="slds-truncate" title="Total">Total</div>
+                                </th>
+                                <th scope="col">
+                                    <div class="slds-truncate" title="Actions"></div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template if:false={opportunityLineItems.length}>
+                                <tr>
+                                    <td colspan="7" class="slds-text-align_center slds-p-vertical_medium">
+                                        No products added yet. Click "Add additional row" to add products.
+                                    </td>
+                                </tr>
+                            </template>
+                            <template for:each={opportunityLineItems} for:item="item" for:index="idx">
+                                <tr key={item.id}>
+                                    <td>{idx_plus_one}</td>
+                                    <td>
+                                        <lightning-combobox
+                                            name="productId"
+                                            value={item.productId}
+                                            placeholder="Select Product"
+                                            options={productOptions}
+                                          
+                                            disabled={isProductDisabled}
+                                        ></lightning-combobox>
+                                    </td>
+                                    <td>
+                                        <lightning-input
+                                            type="number"
+                                            name="quantity"
+                                            value={item.quantity}
+                                          
+                                            min="0"
+                                           
+                                        ></lightning-input>
+                                    </td>
+                                    <td>
+                                        <lightning-formatted-number
+                                            value={item.unitPrice}
+                                            format-style="currency"
+                                            currency-code="USD"
+                                        ></lightning-formatted-number>
+                                    </td>
+                                    <td>
+                                        <lightning-formatted-number
+                                            value={item.listPrice}
+                                            format-style="currency"
+                                            currency-code="USD"
+                                        ></lightning-formatted-number>
+                                    </td>
+                                    <td>
+                                        <lightning-formatted-number
+                                            value={item.total}
+                                            format-style="currency"
+                                            currency-code="USD"
+                                        ></lightning-formatted-number>
+                                    </td>
+                                    <td>
+                                        <lightning-button-icon
+                                            icon-name="utility:delete"
+                                            alternative-text="Delete"
+                                            title="Delete Row"
+                                           
+                                        ></lightning-button-icon>
+                                    </td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="slds-m-top_large slds-grid slds-grid_align-center slds-gap_small">
+                    <lightning-button
+                        label="Add additional row"
+                        icon-name="utility:add"
+                        onclick={handleAddRow}
+                        class="slds-m-right_small"
+                    ></lightning-button>
+                    <lightning-button
+                        label="Delete all rows"
+                        icon-name="utility:delete"
+                        onclick={handleDeleteAllRows}
+                        variant="destructive"
+                        class="slds-m-right_small"
+                    ></lightning-button>
+                    <lightning-button
+                        label="Create Opportunity"
+                        icon-name="utility:check"
+                        onclick={handleCreateOpportunity}
+                        variant="brand"
+                    ></lightning-button>
+                </div>
+            </div>
+        </div>
+    </lightning-card>
+</template>
+

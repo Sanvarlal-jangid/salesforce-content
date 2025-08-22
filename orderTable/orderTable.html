@@ -1,0 +1,30 @@
+<template>
+    <lightning-card title=" Orders Summary">
+        <template if:true={orders.length}>
+            <p class="slds-p-horizontal_medium">Total Orders: {orders.length}</p>
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-m-around_medium">
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Customer</th>
+                        <th>Item</th>
+                        <th>Quantity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template for:each={orders} for:item="order">
+                        <tr key={order.orderId}>
+                            <td>{order.orderId}</td>
+                            <td>{order.customerName}</td>
+                            <td>{order.item}</td>
+                            <td>{order.quantity}</td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>   
+        </template>
+        <template if:false={orders.length}>
+            <p class="slds-p-horizontal_medium">No orders yet.</p>
+        </template>
+    </lightning-card>
+</template>

@@ -1,0 +1,38 @@
+<template>
+    <lightning-card title="Object Record Display" icon-name="standard:record">
+        <div class="slds-p-around_medium">
+            <lightning-combobox
+                name="progress"
+                label="Select Object"
+                value={value}
+                placeholder="Choose Object"
+                options={options}
+                onchange={handleChange}>
+            </lightning-combobox>
+        </div>
+
+        <div class="slds-grid slds-gutters slds-p-around_medium slds-wrap">
+            <!-- Record Table -->
+            <div class="slds-col slds-size_1-of-2">
+                <lightning-datatable
+                    key-field="Id"
+                    data={data}
+                    columns={columns}
+                    onrowaction={handleRowAction}
+                    onrowselection={handleSelection}>
+                </lightning-datatable>
+            </div>
+
+            <!-- User Table -->
+            <div class="slds-col slds-size_1-of-2">
+                <lightning-datatable
+                    key-field="Id"
+                    data={Userdata}
+                    columns={columnss}
+                    onrowaction={handleRowAction}
+                    onrowselection={handleUserSelection}>
+                </lightning-datatable>
+            </div>
+        </div>
+    </lightning-card>
+</template>

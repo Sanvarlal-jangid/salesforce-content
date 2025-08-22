@@ -1,0 +1,22 @@
+/* lwcassignment.css */
+
+.red-text {
+    color: red;
+    font-weight: bold;
+}
+
+.green-text {
+    color: green;
+    font-weight: bold;
+}
+
+/* Existing styles you might have */
+.result-user-answer {
+    font-style: italic;
+    margin-left: 5px;
+}
+
+.result-correct-answer {
+    font-style: italic;
+    margin-left: 5px;
+}

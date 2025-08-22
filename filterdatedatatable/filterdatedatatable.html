@@ -1,0 +1,77 @@
+<template>
+    <lightning-card>
+        <div style="display: flex; justify-content:space-between">
+            <lightning-input label="Search" value={searchKey} onchange={handleSearchChange}>
+            </lightning-input>
+            <lightning-button label="Date" icon-name="utility:calendar" onclick={toggleDropdown}
+                class="slds-m-right_small"></lightning-button>
+           <template if:true={showdatemodal}>
+                <div class={dropdownClass} role="menu">
+                    <div class="slds-grid slds-grid_vertical">
+                        <div class="slds-col slds-m-bottom_small">
+                            <h3 class="slds-text-title_bold slds-m-bottom_x-small">Date range</h3>
+                            <lightning-radio-group
+                                name="dateRangeOptions"
+                                options={dateRangeOptions}
+                                value={selectedDateRange}
+                                onchange={handleDateRangeChange}
+                            ></lightning-radio-group>
+                            
+                        </div>
+
+                        <template if:true={showCustomDateInputs}>
+                            <div class="slds-col slds-m-top_small slds-grid slds-grid_align-spread slds-wrap">
+                                <div class="slds-col slds-size_1-of-2 slds-p-right_x-small">
+                                    <lightning-input
+                                        label="From"
+                                        type="date"
+                                        name="fromDate"
+                                        value={fromDate}
+                                        onchange={handleCustomDateChange}
+                                    ></lightning-input>
+                                </div>
+                                <div class="slds-col slds-size_1-of-2 slds-p-left_x-small">
+                                    <lightning-input
+                                        label="To"
+                                        type="date"
+                                        name="toDate"
+                                        value={toDate}
+                                        onchange={handleCustomDateChange}
+                                    ></lightning-input>
+                                </div>
+                            </div>
+                        </template>
+
+                        <div class="slds-col slds-m-top_medium slds-grid slds-grid_align-end slds-button-group">
+                            <lightning-button
+                                label="Reset"
+                                onclick={handleReset}
+                                variant="neutral"
+                                class="slds-m-right_small"
+                            ></lightning-button>
+                            <lightning-button
+                                label="Apply"
+                                onclick={handleApply}
+                                variant="brand"
+                                disabled={isApplyDisabled}
+                            ></lightning-button>
+                        </div>
+                    </div>
+                </div>
+                </template>
+
+        </div>
+
+        <div style="height: 220px;">
+            <lightning-datatable key-field="id" data={paginatedData} columns={columns} sorted-by={sortBy}
+                sorted-direction={sortDirection} onsort={doSorting} hide-checkbox-column="true" class="myTable"></lightning-datatable>>
+
+            <div class="slds-align_absolute-center slds-m-top_medium">
+                <lightning-button label="Previous" onclick={handlePrevious}
+                    disabled={isPreviousDisabled}></lightning-button>
+                <span class="slds-m-horizontal_medium">Page {currentPage} of {totalPages}</span>
+                <lightning-button label="Next" onclick={handleNext} disabled={isNextDisabled}></lightning-button>
+            </div>
+        </div>
+    </lightning-card>
+</template>

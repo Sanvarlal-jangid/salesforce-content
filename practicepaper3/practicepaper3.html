@@ -1,0 +1,69 @@
+<template>
+    <lightning-card title="Real Estate Dashboard">
+        <div class="slds-m-around_small">
+            <lightning-button label="Add Property (Optional)" onclick={createProperty}></lightning-button>
+        </div>
+
+        <div style="height: 400px;">
+            <c-custom-datatype key-field="id" data={data} columns={columns} hide-checkbox-column onrowaction={handleRowAction}>
+            </c-custom-datatype>
+        </div>
+
+        <!-- View Contact Modal -->
+        <template if:true={showViewModal}>
+            <section role="dialog" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <h2 class="slds-modal__title">Contact Details</h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium">
+                        <lightning-record-view-form record-id={selectedRecordId} object-api-name="Contact">
+                            <div class="slds-grid slds-wrap">
+                                <div class="slds-col slds-size_1-of-2">
+                                    <lightning-output-field field-name="Image__c"></lightning-output-field>
+                                </div>
+                                <div class="slds-col slds-size_1-of-2">
+                                    <lightning-output-field field-name="FirstName"></lightning-output-field>
+                                    <lightning-output-field field-name="Email"></lightning-output-field>
+                                    <lightning-output-field field-name="LastName"></lightning-output-field>
+                                    <lightning-output-field field-name="Phone"></lightning-output-field>
+                                </div>
+                            </div>
+                        </lightning-record-view-form>
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <lightning-button variant="neutral" label="Close" onclick={closeModal}></lightning-button>
+                    </footer>
+                </div>
+            </section>
+        </template>
+
+        <!-- Add Contact Modal -->
+        <template if:true={showAddContactModal}>
+            <section role="dialog" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <h2 class="slds-modal__title">Add Contact</h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium">
+                        <lightning-record-edit-form object-api-name="Contact" onsuccess={handleContactSuccess}>
+                            <lightning-messages></lightning-messages>
+
+                            <lightning-input-field field-name="FirstName"></lightning-input-field>
+                            <lightning-input-field field-name="LastName"></lightning-input-field>
+                            <lightning-input-field field-name="Email"></lightning-input-field>
+                            <lightning-input-field field-name="Phone"></lightning-input-field>
+                            <lightning-input-field field-name="Image__c"></lightning-input-field>
+                            <lightning-input-field field-name="Real_Estate__c" value={realstate}></lightning-input-field>
+
+                            <lightning-button class="slds-m-top_small" type="submit" label="Save Contact"></lightning-button>
+                        </lightning-record-edit-form>
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <lightning-button variant="neutral" label="Close" onclick={closeAddContactModal}></lightning-button>
+                    </footer>
+                </div>
+            </section>
+        </template>
+    </lightning-card>
+</template>

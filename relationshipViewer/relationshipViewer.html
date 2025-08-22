@@ -1,0 +1,26 @@
+<template>
+    <lightning-button label={toggleLabel} onclick={toggleAllSections} class="slds-m-bottom_medium"></lightning-button>
+
+    <lightning-accordion allow-multiple-sections-open active-section-name={activeSections}>
+        <template for:each={relatedLists} for:item="list">
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;" key={list.name}>
+                <lightning-accordion-section key={list.name} name={list.name} label={list.label}>
+                    <div style="display:flex;">
+                        <lightning-icon icon-name="standard:contact"></lightning-icon>
+                        <lightning-button label="New" onclick={createRecord}></lightning-button>
+                    </div>
+
+                    <template for:each={list.records} for:item="record">
+                        <div key={record.id} class="slds-m-bottom_small">
+                            <p>{record.fields.Name.value}</p>
+                        </div>
+                    </template>
+
+                    <template if:false={list.records.length}>
+                        <p>No records found.</p>
+                    </template>
+                </lightning-accordion-section>
+            </div>
+        </template>
+    </lightning-accordion>
+</template>

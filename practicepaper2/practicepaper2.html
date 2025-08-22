@@ -1,0 +1,28 @@
+<template>
+    <lightning-card icon-name="standard:account" variant="base">
+
+        <div style="display: flex; justify-content: space-around; ">
+            <lightning-combobox name="progress" label="type of Document" value={value}
+                placeholder="Select document type" options={options} onchange={handledocumenttype}></lightning-combobox>
+
+            <lightning-combobox name="progress" label="IsActive" value={value} placeholder="Select isActive"
+                options={optionsofactive} onchange={handleisActive}></lightning-combobox>
+        </div>
+    </lightning-card>
+
+
+    <lightning-card title="Document  Details">
+        <lightning-accordion allow-multiple-sections-open active-section-name={activeSectionName}>
+            <template for:each={yearlist} for:item="year">
+                <lightning-accordion-section key={year} name={year} onclick={bringrecord}
+                    label={year}></lightning-accordion-section>
+
+
+            </template>
+        </lightning-accordion>
+
+    </lightning-card>
+
+
+
+</template>

@@ -1,0 +1,72 @@
+<template>
+    <lightning-card title="SIP Calculator " icon-name="utility:money">
+        <div class="slds-var-m-around_medium">
+            <lightning-tabset variant="scoped">
+                <lightning-tab label="Lump Sum" value="lumpSum" onactive={handleTabChange}>
+                    <div class="slds-var-m-vertical_medium">
+                        <h2 class="slds-text-heading_medium slds-var-m-bottom_small">Lump Sum Investment</h2>
+
+                        <lightning-slider label="Investment Amount" min="500" max="1000000" step="1000"
+                            value={lumpSumAmount} onchange={handleLumpSumAmountChange}></lightning-slider>
+                        <p>Current Value: {lumpSumAmount}</p>
+
+                        <lightning-slider label="Investment Duration (Years)" min="1" max="40" step="1"
+                            value={lumpSumDuration} onchange={handleLumpSumDurationChange}></lightning-slider>
+                        <p>Current Value: {lumpSumDuration} Years</p>
+
+                        <lightning-slider label="Expected Annual Return Rate (%)" min="1" max="30" step="0.1"
+                            value={lumpSumRate} onchange={handleLumpSumRateChange}></lightning-slider>
+                        <p>Current Value: {lumpSumRate}%</p>
+
+                        <div class="slds-var-m-top_large">
+                            <h3 class="slds-text-heading_small">Results:</h3>
+                            <p><strong>Total Invested Amount:</strong> {lumpSumInvestedAmount}</p>
+                            <p><strong>Estimated Returns:</strong> {lumpSumEstimatedReturns}</p>
+                            <p><strong>Total Value:</strong> {lumpSumTotalValue}</p>
+                        </div>
+
+                        <div class="chart-container" style="height: 300px;">
+                            <canvas lwc:dom="manual" class="lumpSumChart" width="300" height="300"></canvas>
+                        </div>
+
+                    </div>
+                </lightning-tab>
+
+                <lightning-tab label="Monthly SIP" value="monthlySIP" onactive={handleTabChange}>
+                    <div class="slds-var-m-vertical_medium">
+                        <h2 class="slds-text-heading_medium slds-var-m-bottom_small">Monthly SIP Investment</h2>
+
+                        <lightning-slider label="Monthly Investment Amount" min="500" max="1000000" step="1000"
+                            value={sipMonthlyAmount} onchange={handleSipMonthlyAmountChange}></lightning-slider>
+                        <p>Current Value: ₹{sipMonthlyAmount}</p>
+
+                        <lightning-slider label="Investment Duration (Years)" min="1" max="40" step="1"
+                            value={sipDuration} onchange={handleSipDurationChange}></lightning-slider>
+                        <p>Current Value: {sipDuration} Years</p>
+
+                        <lightning-slider label="Expected Annual Return Rate (%)" min="1" max="30" step="0.1"
+                            value={sipRate} onchange={handleSipRateChange}></lightning-slider>
+                        <p>Current Value: {sipRate}%</p>
+
+                        <div class="slds-var-m-top_large">
+                            <h3 class="slds-text-heading_small">Results:</h3>
+                            <p><strong>Total Invested Amount:</strong> ₹{sipInvestedAmount}</p>
+                            <p><strong>Estimated Returns:</strong> ₹{sipEstimatedReturns}</p>
+                            <p><strong>Total Value:</strong> ₹{sipTotalValue}</p>
+                        </div>
+
+                        <div class="chart-container" style="height: 300px;">
+                            <canvas lwc:dom="manual" class="sipChart" width="300" height="300"></canvas>
+                        </div>
+
+                    </div>
+                </lightning-tab>
+            </lightning-tabset>
+
+            <div class="slds-var-m-top_large slds-align_absolute-center">
+                <lightning-button label="Save Investment" onclick={handleSaveInvestment}
+                    variant="brand"></lightning-button>
+            </div>
+        </div>
+    </lightning-card>
+</template>

@@ -1,0 +1,61 @@
+<template>
+    <lightning-card title="Document Manager (Accordion View)" icon-name="custom:custom63">
+        <lightning-button label="New Document" onclick={handleNew} class="slds-m-bottom_small"></lightning-button>
+
+        <lightning-combobox
+            label="type of Document"
+            options={typeOptions}
+            value={selectedType}
+            onchange={handleTypeFilter}
+            class="slds-m-bottom_small">
+        </lightning-combobox>
+
+        <lightning-combobox
+            label="IsActive"
+            options={activeOptions}
+            value={selectedActive}
+            onchange={handleActiveFilter}
+            class="slds-m-bottom_small">
+        </lightning-combobox>
+
+        <lightning-accordion allow-multiple-sections-open>
+            <template for:each={yearGroups} for:item="year">
+                <lightning-accordion-section name={year.year} label={year.year} key={year.year}>
+                    <lightning-datatable
+                        key-field="Id"
+                        data={year.records}
+                          columns={columns}
+                        onsort={handleSort}
+                        sorted-by={sortBy}
+                        sorted-direction={sortDirection}
+                        onrowaction={handleRowAction}>
+                    </lightning-datatable>
+                </lightning-accordion-section>
+            </template>
+        </lightning-accordion>
+    </lightning-card>
+
+    <template if:true={showModal}>
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <h2 class="slds-modal__title">Edit Document</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium">
+                    <lightning-record-edit-form object-api-name="Document__c" record-id={selectedRecordId} onsuccess={handleSuccess}>
+                        <lightning-messages></lightning-messages>
+                        <lightning-input-field field-name="Name"></lightning-input-field>
+                        <lightning-input-field field-name="Document_type__c"></lightning-input-field>
+                        <lightning-input-field field-name="valid_from_date__c"></lightning-input-field>
+                        <lightning-input-field field-name="Valid_to_date__c"></lightning-input-field>
+                    </lightning-record-edit-form>
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning-button variant="neutral" label="Cancel" onclick={closeModal}></lightning-button>
+                    <lightning-button variant="brand" type="submit" label="Save" onclick={submitEdit}></lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>
