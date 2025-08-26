@@ -1,0 +1,69 @@
+<template>
+
+    <lightning-card title="Platform Event Records" icon-name="standard:opportunity">
+
+            <!-- Simple form to create Opportunity -->
+            <lightning-input label="Opportunity Name" value={oppName} onchange={handleNameChange}></lightning-input>
+            <lightning-input label="Stage" value={oppStage} onchange={handleStageChange}></lightning-input>
+            <lightning-input type="number" label="Amount" value={oppAmount} onchange={handleAmountChange}></lightning-input>
+            <lightning-button label="Create Opportunity" variant="brand" class="slds-m-top_small" onclick={createOpportunity}></lightning-button>
+            
+        <div class="slds-m-around_medium">
+            <template if:true={eventRecords}>
+                <div class="slds-scrollable_x">
+                    <table class="slds-table slds-table_bordered slds-table_striped slds-table_fixed-layout custom-table">
+
+                        <thead>
+                            <tr class="slds-line-height_reset custom-header">
+                                <th scope="col">
+                                    <div class="slds-truncate" title="Opportunity Name">Opportunity Name</div>
+                                </th>
+                                <th scope="col">
+                                    <div class="slds-truncate" title="Stage Name">Stage Name</div>
+                                </th>
+                                <th scope="col">
+                                    <div class="slds-truncate" title="Close Date">Close Date</div>
+                                </th>
+                                <th scope="col">
+                                    <div class="slds-truncate" title="Amount">Amount</div>
+                                </th>
+                                <th scope="col">
+                                    <div class="slds-truncate" title="Timestamp">Timestamp</div>
+                                </th>
+                            </tr>
+
+                        </thead>
+                        <tbody>
+                            <template for:each={eventRecords} for:item="record">
+                                <tr key={record.id}>
+                                    <td>
+                                        <a href="#" class="slds-text-link custom-link" onclick={handleOpportunityClick} data-id={record.OppId}>
+                                            <lightning-formatted-text value={record.OppName}></lightning-formatted-text>
+                                        </a>
+
+                                    </td>
+                                    <td class="slds-text-title_caps slds-text-color_success">
+                                        <lightning-formatted-text value={record.StageName}></lightning-formatted-text>
+                                    </td>
+                                    <td class="slds-text-title_bold slds-text-color_destructive">
+                                        <lightning-formatted-date-time value={record.CloseDate} year="numeric" month="short" day="2-digit"></lightning-formatted-date-time>
+                                    </td>
+                                    <td class="slds-text-title_bold">
+                                      <lightning-formatted-number value={record.Amount} format-style="currency"></lightning-formatted-number>
+                                    </td>
+                                    <td class="slds-text-body_small slds-text-color_weak">
+                                        {record.Timestamp}
+                                    </td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                </div>
+            </template>
+            <template if:false={eventRecords}>
+                <p class="slds-text-color_weak slds-align_absolute-center">No events to display.</p>
+            </template>
+        </div>
+    </lightning-card>
+
+</template>
