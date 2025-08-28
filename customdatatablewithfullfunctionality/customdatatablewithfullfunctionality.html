@@ -1,0 +1,81 @@
+<template>
+    <lightning-card title="Associate Opportunities" icon-name="standard:opportunity">
+        <div class="slds-m-around_medium">
+            <lightning-combobox
+                label="Account Name"
+                value={selectedAccountId}
+                placeholder="Select an Account"
+                options={accountOptions}
+                onchange={handleAccountChange}
+            ></lightning-combobox>
+
+            <div class="slds-m-vertical_small">
+                <p>Associate Opportunities Total Count: {totalOpportunityCount} </p>
+                <p>Total Amount: ${totalAmount} </p>
+            </div>
+
+            <div class="slds-table--header-fixed_container slds-scrollable_y" style="height: 300px;">
+                <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                    <thead>
+                        <tr class="slds-line-height_reset">
+                            <th scope="col">Opportunity Name</th>
+                           
+                            <th scope="col">Amount</th>
+                       
+                            <th scope="col">Stage </th>
+                     
+                            <th scope="col">Close Date </th>
+                       
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template for:each={opportunities} for:item="opp">
+                            <tr key={opp.Id}  class={opp.stageClass} >
+                                <td data-label="Opportunity Name"  class="slds-truncate">
+                                    <a onclick={navigateToRecord} data-id={opp.Id}>{opp.Name}</a>
+                                </td>
+                                <td data-label="Amount" data-id={opp.Id} data-field="Amount" onmouseover={showPenIcon} onmouseout={hidePenIcon}>
+                                    <template if:true={opp.isEditingAmount}>
+                                        <lightning-input
+                                            type="number"
+                                            value={opp.Amount}
+                                            onchange={handleInputChange}
+                                            onblur={handleBlur}
+                                            data-id={opp.Id}
+                                            data-field="Amount"
+                                        ></lightning-input>
+                                    </template>
+                                    <template if:false={opp.isEditingAmount}>
+                                        <div ondblclick={handleDoubleClick} data-id={opp.Id} data-field="Amount" class="editable-cell">
+                                            <span class="cell-value">${opp.Amount}</span>
+                                            <span class="pen-icon slds-hidden">✏️</span> 
+                                        </div>
+                                    </template>
+                                </td>
+                                <td data-label="Stage" data-id={opp.Id} data-field="StageName" onmouseover={showPenIcon} onmouseout={hidePenIcon}>
+                                    <template if:true={opp.isEditingStage}>
+                                        <lightning-combobox
+                                            value={opp.StageName}
+                                            options={stageOptions}
+                                            onchange={handleInputChange}
+                                            onblur={handleBlur}
+                                            data-id={opp.Id}
+                                            data-field="StageName"
+                                        ></lightning-combobox>
+                                    </template>
+                                    <template if:false={opp.isEditingStage}>
+                                        <div ondblclick={handleDoubleClick} data-id={opp.Id} data-field="StageName" class="editable-cell">
+                                            <span class="cell-value">{opp.StageName}</span>
+                                            <span class="pen-icon slds-hidden">✏️</span>
+                                        </div>
+                                    </template>
+                                </td>
+                                <td data-label="Close Date" class="slds-truncate">{opp.CloseDate}</td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </lightning-card>
+</template>

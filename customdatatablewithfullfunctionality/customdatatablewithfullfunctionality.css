@@ -1,0 +1,30 @@
+.closed-won-row {
+    color: green; 
+    /* [cite: 6] */
+}
+
+.closed-lost-row {
+    color: red; 
+    /* [cite: 6] */
+}
+
+.editable-cell {
+    position: relative;
+    cursor: pointer;
+}
+.red{
+    background-color: rgb(247, 123, 123);
+    color: white;
+}
+.green{
+ background-color: rgb(143, 238, 143);
+ color: white;
+}
+
+
+.pen-icon {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+}
