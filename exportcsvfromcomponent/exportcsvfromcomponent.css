@@ -1,0 +1,15 @@
+.red{
+    background-color: rgb(248, 23, 109);
+    color: white;
+    border-radius: 5px;
+  
+}
+.orange{
+    background-color: rgb(253, 94, 30);
+    color: white;
+       border-radius: 5px;
+ 
+}
+.blue{
+    color: blue;
+}

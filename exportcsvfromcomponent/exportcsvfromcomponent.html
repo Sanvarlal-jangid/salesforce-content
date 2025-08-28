@@ -1,0 +1,127 @@
+<template>
+  
+     <div style="display: flex;">
+        <lightning-input type="date" label="Select Start Date"  value={selectedDatestart} onchange={handleDateChange}></lightning-input>
+        <lightning-input type="date" label="Select End Date" value={selectedDateend} onchange={handleEndDateChange}></lightning-input>
+        <lightning-button label="Apply" onclick={handleClick}></lightning-button>
+        <lightning-button label="refresh" onclick={handlerefresh}></lightning-button>
+
+     </div>
+ <div class="slds-box slds-theme--default">
+      
+        <p class="slds-m-top--large">
+            <!-- <a onclick={exportContactData}>Export Contact Data</a> -->
+            <lightning-button variant="brand" label="Export" title="Export Contact Data" onclick={exportContactData}></lightning-button>
+        </p>
+    </div>
+      <!-- <div class="slds-m-top_medium">
+               
+                 <lightning-button
+                    label="Export"
+                    onclick={downloadCSV}>
+                </lightning-button>
+            </div> -->
+  
+
+    <div style="margin-top: 20px; height: 500px;">
+    <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped">
+        <thead>
+            <tr class="slds-line-height_reset">
+                <th scope="col">
+                    <div class="slds-truncate" title="Nr.">Order By.</div>
+                </th>
+                <th scope="col">
+                    <div class="slds-truncate" title="Product">Order By</div>
+                </th>
+                <th scope="col">
+                    <div class="slds-truncate" title="Quantity">Nickname</div>
+                </th>
+                <th scope="col">
+                    <div class="slds-truncate" title="Unit Price">Company Name</div>
+                </th>
+                <th scope="col">
+                    <div class="slds-truncate" title="List Price">Order Date</div>
+                </th>
+                <th scope="col">
+                    <div class="slds-truncate" title="Total">Status </div>
+                </th>
+                <th scope="col">
+                    <div class="slds-truncate" title="Total">Amount </div>
+                </th>
+                <th scope="col">
+                    <div class="slds-truncate" title="Actions">Action </div>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <template for:each={filtereddata} for:item="item" for:index="index">
+                <tr key={item.key}>
+                    <td><span>{item.OrderId}</span></td>
+                    <td><span>{item.Orderby}</span></td>
+                    <td><span>{item.ContactName}</span></td>
+                    <td><span>{item.AccountName}</span></td>
+                    <td><span>{item.EffectiveDate}</span></td>
+                    <td><span class={item.setclass}>{item.Status}</span></td>
+                    <td><span>{item.TotalAmount}</span></td>
+                    <td>
+                        <div onclick={handlecreatClick} data-id={item.OrderId}>
+                            <span class={item.blue}>reorder</span>
+                        </div>
+                    </td>
+
+
+
+                </tr>
+            </template>
+        </tbody>
+    </table>
+    </div>
+
+</template>
+<!-- 
+<template>
+    <div style="display: flex;">
+        <lightning-input type="date" label="Select Start Date" value={selectedDatestart} onchange={handleDateChange}></lightning-input>
+        <lightning-input type="date" label="Select End Date" value={selectedDateend} onchange={handleEndDateChange}></lightning-input>
+        <lightning-button label="Apply" onclick={handleClick}></lightning-button>
+    </div>
+
+    <div class="slds-m-top_medium">
+        <lightning-button label="Export" onclick={downloadCSV}></lightning-button>
+    </div>
+
+    <div style="margin-top: 20px; height: 500px;">
+        <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped">
+            <thead>
+                <tr class="slds-line-height_reset">
+                    <th scope="col"><div class="slds-truncate" title="Nr.">Order By.</div></th>
+                    <th scope="col"><div class="slds-truncate" title="Product">Order By</div></th>
+                    <th scope="col"><div class="slds-truncate" title="Quantity">Nickname</div></th>
+                    <th scope="col"><div class="slds-truncate" title="Unit Price">Company Name</div></th>
+                    <th scope="col"><div class="slds-truncate" title="List Price">Order Date</div></th>
+                    <th scope="col"><div class="slds-truncate" title="Total">Status</div></th>
+                    <th scope="col"><div class="slds-truncate" title="Total">Amount</div></th>
+                    <th scope="col"><div class="slds-truncate" title="Actions">Action</div></th>
+                </tr>
+            </thead>
+            <tbody>
+                <template for:each={filtereddata} for:item="item">
+                    <tr key={item.OrderId}>
+                        <td><span>{item.OrderId}</span></td>
+                        <td><span>{item.Orderby}</span></td>
+                        <td><span>{item.ContactName}</span></td>
+                        <td><span>{item.AccountName}</span></td>
+                        <td><span>{item.EffectiveDate}</span></td>
+                        <td><span class={item.setclass}>{item.Status}</span></td>
+                        <td><span>{item.TotalAmount}</span></td>
+                        <td>
+                            <div onclick={handlecreatClick} data-id={item.OrderId}>
+                                <span class={item.blue}>reorder</span>
+                            </div>
+                        </td>
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+    </div>
+</template> -->
