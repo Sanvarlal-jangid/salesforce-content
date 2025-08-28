@@ -1,0 +1,32 @@
+<template>
+    <lightning-card class="slds-m-left_x-large" title="Upload CSV File and Create Records">
+        <lightning-file-upload label="Upload Excel File" accept=".csv"
+            onuploadfinished={uploadFileHandler}></lightning-file-upload>
+    </lightning-card>
+    <lightning-card>
+        <div if:true={data}>
+            <lightning-datatable columns={columns} data={data} hide-checkbox-column="true"
+                key-field="id"></lightning-datatable>
+        </div>
+        <lightning-button variant="brand" label="Generate Result" title="Primary action" onclick={handleClick}
+            class="slds-m-left_x-small"></lightning-button>
+
+    </lightning-card>
+    <lightning-card>
+        <lightning-tabset variant="scoped">
+            <lightning-tab label="Graphic view" value="graphicview" onactive={handleTabChange}>
+                <div class="chart-container" style="height: 300px;">
+                    <canvas lwc:dom="manual" class="graphicalview" width="300" height="300"></canvas>
+                </div>
+            </lightning-tab>
+
+            <lightning-tab label="Table view" value="table view" onactive={handleTabChange}>
+                <lightning-datatable columns={columnsss} data={tableviewdata} hide-checkbox-column="true"
+                    key-field="id"></lightning-datatable>
+            </lightning-tab>
+
+        </lightning-tabset>
+
+    </lightning-card>
+
+</template>
